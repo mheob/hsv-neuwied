@@ -1,0 +1,15 @@
+# Misc
+.DS_Store
+*.pem
+
+# Dependency directories
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dotenv environment variables file
+.env
+
+# DeepCode
+.dccache

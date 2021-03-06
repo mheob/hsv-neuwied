@@ -1,0 +1,14 @@
+{
+  "extends": ["config:base", ":preserveSemverRanges"],
+  "baseBranches": ["main"],
+  "assignees": ["mheob"],
+  "reviewers": ["mheob"],
+  "labels": ["dependencies"],
+  "ignorePaths": ["**/node_modules/**"],
+  "packageRules": [
+    {
+      "depTypeList": ["devDependencies"],
+      "enabled": false
+    }
+  ]
+}

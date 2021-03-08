@@ -8,31 +8,25 @@
   "Inserts useEffect hook": {
     "scope": "javascriptreact,typescriptreact",
     "prefix": "ueh",
-    "body": ["useEffect(() => {$0}, [])"],
+    "body": ["useEffect(() => {$0}, []);"],
     "description": "Inserts useEffect hook"
   },
   "Inserts useState hook": {
     "scope": "javascriptreact,typescriptreact",
     "prefix": "ush",
-    "body": "const [${1}, set${1/(.)/${1:/upcase}/}] = useState(${2})",
+    "body": "const [${1}, set${1/(.)/${1:/upcase}/}] = useState(${2});",
     "description": "Inserts useState hook"
   },
   "Inserts useRef hook": {
     "scope": "javascriptreact,typescriptreact",
     "prefix": "ureh",
-    "body": ["const ${1}Ref = useRef(${2})"],
+    "body": ["const ${1}Ref = useRef(${2});"],
     "description": "Inserts useRef hook"
   },
   "Inserts useRouter hook": {
     "scope": "javascriptreact,typescriptreact",
     "prefix": "uroh",
-    "body": ["const router = useRouter()"],
+    "body": ["const router = useRouter();"],
     "description": "Inserts useRouter hook"
-  },
-  "Insert a styled component": {
-    "scope": "javascriptreact,typescriptreact",
-    "prefix": "sc",
-    "body": ["const ${1/(.)/${1:/upcase}/}Styled = styled.${1}`", "  ${2}", "`", ""],
-    "description": "Insert a styled component"
   }
 }

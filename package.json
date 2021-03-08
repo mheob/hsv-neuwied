@@ -23,7 +23,7 @@
     "dev": "yarn workspaces run dev",
     "format": "yarn workspaces run format",
     "lint": "yarn workspaces run lint",
-    "prepare": "husky install ./config/husky",
+    "prepare": "husky install ./config/husky && yarn workspaces run prepare",
     "semantic-release": "yarn workspaces run semantic-release",
     "start": "yarn workspaces run start",
     "type-check": "yarn workspaces run type-check"
@@ -33,6 +33,11 @@
       "@commitlint/config-conventional"
     ]
   },
+  "browserslist": [
+    "last 4 version",
+    "> 2%",
+    "not dead"
+  ],
   "prettier": "./config/.prettierrc.json",
   "eslintConfig": {
     "extends": "./config/.eslintrc.json"
@@ -43,7 +48,23 @@
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "hint": "^6.1.3",
     "husky": "^5.1.3",
     "prettier": "^2.2.1"
+  },
+  "hintConfig": {
+    "extends": [
+      "web-recommended",
+      "progressive-web-apps"
+    ],
+    "parsers": [
+      "jsx",
+      "typescript"
+    ],
+    "hints": {
+      "apple-touch-icons": "off",
+      "compat-api/html": "off",
+      "html-checker": "off"
+    }
   }
 }

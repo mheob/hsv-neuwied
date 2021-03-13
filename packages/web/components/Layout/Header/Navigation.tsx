@@ -10,11 +10,13 @@ import {
 } from '@chakra-ui/react';
 import { IoMenu } from 'react-icons/io5';
 
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import breakpoints from '../../../theme/foundations/breakpoints';
 import NavigationLinks from './NavigationLinks';
 
-type Props = { isMobile: boolean };
+export default function Navigation() {
+  const { isMobile } = useMediaQuery(breakpoints.lg);
 
-export default function Navigation({ isMobile }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -30,13 +32,13 @@ export default function Navigation({ isMobile }: Props) {
 
             <DrawerContent bgColor="brand.dark">
               <DrawerBody p="0">
-                <NavigationLinks isMobile={isMobile} />
+                <NavigationLinks />
               </DrawerBody>
             </DrawerContent>
           </Drawer>
         </>
       ) : (
-        <NavigationLinks isMobile={isMobile} />
+        <NavigationLinks />
       )}
     </Flex>
   );

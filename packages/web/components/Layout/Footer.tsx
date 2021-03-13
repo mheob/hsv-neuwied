@@ -1,6 +1,8 @@
-import { Box, Container, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Link, Stack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
+
+import Container from '../UI/Container';
 
 export default function Footer() {
   const router = useRouter();
@@ -9,7 +11,7 @@ export default function Footer() {
 
   return (
     <Box as="footer" pos="fixed" bottom="0" w="full" my="12" color="white" zIndex="hide">
-      <Container d="flex" justifyContent="space-between" maxW="6xl">
+      <Container d="flex" justifyContent="space-between">
         <Box fontSize={{ base: 'sm', lg: 'md', '2xl': 'xl' }}>
           <Text as="span" mr="2">
             &copy; 2014 &ndash; {new Date().getFullYear()}

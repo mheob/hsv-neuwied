@@ -1,52 +1,46 @@
-import { Box, Heading } from '@chakra-ui/layout';
-// import { useMediaQuery } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 
-import Layout from '@components/Layout';
-// import { breakpoints } from '@theme';
+import Button from '../components/Forms/Button';
+import Layout from '../components/Layout';
+import NewsSlider from '../components/News/Slider';
+import Contact from '../components/Pages/Landing/Contact';
+import Matches from '../components/Pages/Landing/Matches';
+import Partner from '../components/Pages/Landing/Partner';
+import PageHeader from '../components/UI/Header/PageHeader';
+import articleList from '../data/articles.json';
+import { useMediaQuery } from '../hooks/useMediaQuery';
+import { breakpoints } from '../theme';
 
 export default function Index() {
-  // const [isMobile] = useMediaQuery(`(max-width: ${breakpoints.sm})`);
+  const { isMobile } = useMediaQuery(breakpoints.lg);
 
   return (
     <Layout title="Home &mdash; HSV Neuwied">
-      {/* <PageHeader
-        data-testid="page-header"
+      <PageHeader
         title="Heimatsportverein"
         subtitle="in und für Neuwied"
-        bgImage="/images/pages/landing/hsv-neuwied-hero"
+        bgImage="/images/pages/hsv-neuwied-hero-landing.jpg"
       >
-        <p className="text-xl xl:text-2xl">
+        <Text fontSize={{ base: 'xl', xl: '2xl' }}>
           Du willst mehr über das Angebot und die Aktivitäten vom HSV&nbsp;Neuwied wissen?
-        </p>
-        <p className="mt-3 text-xl xl:text-2xl">
+        </Text>
+
+        <Text fontSize={{ base: 'xl', xl: '2xl' }} mt="3">
           Dann bleib auf dem Laufenden! In und für Neuwied.
-        </p>
-        <Button
-          className="mt-8 text-xl xl:text-2xl"
-          brightness={Brightness.MEDIUM}
-          size={Size.LARGE}
-        >
+        </Text>
+
+        <Button size="lg" mt="8">
           Mehr erfahren
         </Button>
       </PageHeader>
 
-      <LandingMatches data-testid="landing-matches" className="mt-16 md:mt-32 xl:mt-64" />
+      <Matches mt={{ base: '16', md: '32', xl: '48' }} />
 
-      <NewsSlider
-        data-testid="landing-slider"
-        className="mt-56"
-        articleList={articleList.slice(0, 5)}
-      />
+      <NewsSlider articleList={articleList.slice(0, 5)} mt={{ base: '16', md: '32', xl: '48' }} />
 
-      <LandingContact data-testid="landing-contact" className="mt-16 md:mt-32 xl:mt-64" />
+      <Contact mt={{ base: '16', md: '32', xl: '48' }} />
 
-      {!isMobile && <LandingPartner data-testid="landing-partner" className="mt-80" />} */}
-
-      <Box bgColor="brand.base" color="white">
-        <Heading as="h2">
-          An error occurred motion.custom() is deprecated. Use motion() instead.
-        </Heading>
-      </Box>
+      {!isMobile && <Partner mt={{ md: '32', xl: '48' }} />}
     </Layout>
   );
 }

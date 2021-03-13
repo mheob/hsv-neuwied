@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "title": "… für alles",
+    "name": "Stephan Petry",
+    "position": "Präsident",
+    "image": "/images/persons/petry-stephan-praesident-18-19.jpg",
+    "mail": "s.petry@hsv-neuwied.de",
+    "tel": "+49 176 23816422"
+  },
+  {
+    "id": "2",
+    "title": "… für's Sportliche",
+    "name": "Stefan Fink",
+    "position": "Sportliche Leitung",
+    "image": "/images/persons/fink-stefan-trainer-hsv-neuwied-18-19.jpg",
+    "mail": "s.fink@hsv-neuwied.de",
+    "tel": "+49 1577 2548131"
+  },
+  {
+    "id": "3",
+    "title": "… für's Finanzielle",
+    "name": "Alexander Hammes",
+    "position": "Kassierer",
+    "image": "/images/persons/hammes-alexander-bambini-trainer-18-19.jpg",
+    "mail": "a.hammes@hsv-neuwied.de",
+    "tel": "+49 176 20421194"
+  }
+]

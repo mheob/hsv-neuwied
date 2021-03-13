@@ -1,36 +1,22 @@
 import { Box } from '@chakra-ui/layout';
 import Head from 'next/head';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import pkg from '../../package.json';
-
-import { initFocusRingOnlyOnTab } from '@utils/accessibility';
-import { navigationBarState } from '@utils/navigation/scroll';
-
+import theme from '../../theme';
+import { initFocusRingOnlyOnTab } from '../../utils/accessibility';
 import Footer from './Footer';
 import Header from './Header';
 
 const APP_NAME = 'HSV Neuwied';
 
-type Props = { title?: string; children: ReactNode };
+type Props = {
+  title?: string;
+  children: ReactNode;
+};
 
 export default function Layout({ children, title = 'Heimatsportverein Neuwied 2014' }: Props) {
-  const limitPosition = 20;
-  const [isPinned, setPinned] = useState(false);
-  const [lastPosition, setLastPosition] = useState(0);
-
-  const handleScroll = () => {
-    const [pinned, position] = navigationBarState({
-      limitPosition,
-      pinned: isPinned,
-      lastPosition,
-    });
-    setPinned(pinned);
-    setLastPosition(position);
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
     initFocusRingOnlyOnTab();
   }, []);
 
@@ -58,12 +44,26 @@ export default function Layout({ children, title = 'Heimatsportverein Neuwied 20
         <link rel="shortcut icon" href="/icons/favicon.svg" type="image/svg+xml" sizes="any" />
       </Head>
 
-      <Header isPinned={isPinned} />
+      <Header />
 
-      {/*
-        // TODO: Remove the Box after testing and implementation
-      */}
-      <Box as="main" h="200vh">
+      <Box
+        as="main"
+        pos="relative"
+        mb={theme.sizes.footer.height}
+        pt={{ lg: `calc(${theme.sizes.header.height} - 2.5vw)` }}
+        pb="calc(102.5vw / 4.26667 + 10rem)"
+        overflowX="hidden"
+        bgColor={theme.colors.gray.light}
+        clipPath="polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw))"
+        _after={{
+          pos: 'absolute',
+          bottom: '10px',
+          w: '100vw',
+          h: 'calc(100vw / 4.26667)',
+          background: 'url("/images/banner/hsv-neuwied-banner.min.svg") no-repeat',
+          content: '""',
+        }}
+      >
         {children}
       </Box>
 

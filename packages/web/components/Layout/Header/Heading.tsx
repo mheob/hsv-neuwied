@@ -1,13 +1,16 @@
 import { Heading as ChakraHeading, Link, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useContext } from 'react';
 
-type Props = { isPinned?: boolean };
+import RootContext from '../../../store/RootContext';
 
-export default function Heading({ isPinned }: Props) {
+export default function Heading() {
+  const { isPinned } = useContext(RootContext);
+
   return (
     <ChakraHeading
       as="h1"
-      ml={isPinned ? '32' : '44'}
+      ml={{ base: '32', lg: isPinned ? '32' : '48' }}
       fontFamily="brand"
       fontSize={{ base: 'sm', lg: 'md', '2xl': 'xl' }}
       transition="all 200ms linear"

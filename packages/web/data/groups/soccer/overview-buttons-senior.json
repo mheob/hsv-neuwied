@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "label": "News",
+    "to": "/senioren/news",
+    "brightness": "dark",
+    "size": "large"
+  },
+  {
+    "id": "2",
+    "label": "Erste Mannschaft",
+    "to": "#!",
+    "brightness": "dark",
+    "size": "large"
+  },
+  {
+    "id": "3",
+    "label": "Amateure",
+    "to": "#!",
+    "brightness": "dark",
+    "size": "large"
+  },
+  {
+    "id": "4",
+    "label": "Alte Herren",
+    "to": "#!",
+    "brightness": "dark",
+    "size": "large"
+  }
+]

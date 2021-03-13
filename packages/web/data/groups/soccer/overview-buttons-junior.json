@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "label": "News",
+    "to": "/nachwuchs/news",
+    "brightness": "dark",
+    "size": "large"
+  },
+  {
+    "id": "2",
+    "label": "D-Jugend",
+    "to": "#!",
+    "brightness": "dark",
+    "size": "large"
+  },
+  {
+    "id": "3",
+    "label": "E-Jugend",
+    "to": "#!",
+    "brightness": "dark",
+    "size": "large"
+  },
+  {
+    "id": "4",
+    "label": "F-Jugend",
+    "to": "#!",
+    "brightness": "dark",
+    "size": "large"
+  },
+  {
+    "id": "5",
+    "label": "Bambinis",
+    "to": "#!",
+    "brightness": "dark",
+    "size": "large"
+  }
+]

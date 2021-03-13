@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "name": "Hauptverein",
+    "slug": "hauptverein"
+  },
+  {
+    "id": "2",
+    "name": "Nachwuchs",
+    "slug": "nachwuchs"
+  },
+  {
+    "id": "3",
+    "name": "Rhein Diamanten",
+    "slug": "rhein-diamanten"
+  },
+  {
+    "id": "4",
+    "name": "Senioren",
+    "slug": "senioren"
+  },
+  {
+    "id": "5",
+    "name": "Turnklötzchen",
+    "slug": "turnkloetzchen"
+  }
+]

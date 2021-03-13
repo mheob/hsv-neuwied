@@ -3,12 +3,13 @@ import styled from '@emotion/styled';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 
-import theme, { mediaQuery } from '@theme';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import theme, { breakpoints, mediaQuery } from '../../../theme';
 
-type Props = { isMobile: boolean };
-
-export default function NavigationLinks({ isMobile }: Props) {
+export default function NavigationLinks() {
   const router = useRouter();
+
+  const { isMobile } = useMediaQuery(breakpoints.lg);
 
   const isCurrentPage = (href: string) => href === router.pathname;
   const getActiveLinkColor = (href: string) => (isCurrentPage(href) ? 'brand.light' : 'white');
@@ -17,15 +18,15 @@ export default function NavigationLinks({ isMobile }: Props) {
   return (
     <Stack
       as="nav"
-      direction={{ base: 'column', sm: 'row' }}
+      direction={{ base: 'column', lg: 'row' }}
       alignItems="stretch"
       justifyContent="space-around"
       spacing={{ lg: '10' }}
       fontSize="md"
-      pos={{ base: 'absolute', sm: 'unset' }}
+      pos={{ base: 'absolute', lg: 'unset' }}
       bottom="0"
-      h={{ base: `calc(100vh - ${theme.sizes.header.heightPinned})`, sm: 'unset' }}
-      w={{ base: 'full', sm: 'unset' }}
+      h={{ base: `calc(100vh - ${theme.sizes.header.heightPinned})`, lg: 'unset' }}
+      w={{ base: 'full', lg: 'unset' }}
       py="12"
     >
       {isMobile && (

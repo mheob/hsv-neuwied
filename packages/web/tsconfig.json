@@ -1,16 +1,18 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "@components/*": ["components/*"],
-      "@hooks/*": ["hooks/*"],
-      "@models/*": ["models/*"],
-      "@pages/*": ["pages/*"],
-      "@theme": ["theme"],
-      "@theme/*": ["theme/*"],
-      "@utils/*": ["utils/*"]
-    }
+    "jsx": "preserve"
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@components/*": ["components/*"],
+    //   "@data/*": ["data/*"],
+    //   "@hooks/*": ["hooks/*"],
+    //   "@models/*": ["models/*"],
+    //   "@pages/*": ["pages/*"],
+    //   "@store/*": ["store/*"],
+    //   "@theme": ["theme"],
+    //   "@theme/*": ["theme/*"],
+    //   "@utils/*": ["utils/*"]
+    // }
   }
 }

@@ -1,11 +1,13 @@
 import { Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useContext } from 'react';
 
-import theme from '@theme';
+import RootContext from '../../../store/RootContext';
+import theme from '../../../theme';
 
-type Props = { isPinned?: boolean };
+export default function Logo() {
+  const { isPinned } = useContext(RootContext);
 
-export default function Logo({ isPinned }: Props) {
   return (
     <NextLink href="/" passHref>
       <Link
@@ -17,7 +19,6 @@ export default function Logo({ isPinned }: Props) {
         _after={{
           pos: 'absolute',
           top: '10px',
-          left: '30px',
           w: { base: '77px', lg: isPinned ? '102px' : '153px' },
           h: { base: '100px', lg: isPinned ? '133px' : '200px' },
           backgroundImage: 'url("/images/logos/hsv-neuwied-logo.min.svg")',
@@ -25,6 +26,7 @@ export default function Logo({ isPinned }: Props) {
           zIndex: theme.zIndices.skipLink,
           transition: 'all 200ms linear',
         }}
+        aria-label="Logo mit Link zur Home Page"
       />
     </NextLink>
   );

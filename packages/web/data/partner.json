@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "Althoff Apotheke Neuwied",
+    "image": "/images/partner/althoff-apotheke.png"
+  },
+  {
+    "id": "2",
+    "name": "American Sportsbar Neuwied",
+    "image": "/images/partner/american-sportsbar-neuwied.png"
+  },
+  {
+    "id": "3",
+    "name": "BECO / Gesellschaft für EDV",
+    "image": "/images/partner/beco.png"
+  },
+  {
+    "id": "4",
+    "name": "Bleser Mietstation",
+    "image": "/images/partner/bleser-mietstation.png"
+  },
+  {
+    "id": "5",
+    "name": "Orthopädische Praxis Dr. Corzilius",
+    "image": "/images/partner/cmc-corzilius.png"
+  },
+  {
+    "id": "6",
+    "name": "Colour-Wrap / Folie statt Lack",
+    "image": "/images/partner/colour-wrap.png"
+  },
+  {
+    "id": "7",
+    "name": "Daniel Zeus Vorsorge-Kompetenz mit Wüstenrot in Neuwied",
+    "image": "/images/partner/daniel-zeus-wuestenrot.png"
+  },
+  {
+    "id": "8",
+    "name": "Friseur Hairlich",
+    "image": "/images/partner/hairlich.png"
+  },
+  {
+    "id": "9",
+    "name": "Intersport Krumholz",
+    "image": "/images/partner/intersport-krumholz.png"
+  },
+  {
+    "id": "10",
+    "name": "Krüger Werbetechnik",
+    "image": "/images/partner/krueger-werbetechnik.png"
+  },
+  {
+    "id": "11",
+    "name": "Automobile Kunar",
+    "image": "/images/partner/kunar.png"
+  },
+  {
+    "id": "12",
+    "name": "Macuia",
+    "image": "/images/partner/macuia.png"
+  },
+  {
+    "id": "13",
+    "name": "POSAIDON Fahrzeugtuningwerkstatt",
+    "image": "/images/partner/posaidon.png"
+  },
+  {
+    "id": "14",
+    "name": "Rewe Bartholomeus",
+    "image": "/images/partner/rewe-bartholomeus.png"
+  },
+  {
+    "id": "15",
+    "name": "Gaststätte Rheinhöhe",
+    "image": "/images/partner/rheinhoehe.png"
+  },
+  {
+    "id": "16",
+    "name": "Markus Fischer selbstständiger Handelsvertreter für Swiss Life Select",
+    "image": "/images/partner/swisslife-markus-fischer.png"
+  },
+  {
+    "id": "17",
+    "name": "SWN",
+    "image": "/images/partner/swn.png"
+  },
+  {
+    "id": "18",
+    "name": "VR-Bank Neuwied-Linz eG",
+    "image": "/images/partner/vr-bank-neuwied.png"
+  }
+]

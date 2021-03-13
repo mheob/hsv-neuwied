@@ -10,6 +10,7 @@ export const sizes = {
     slider: {
       imageHeightMobile: '50vh',
       imageHeight: '70vh',
+      arrowSizeMobile: '80px',
       arrowSize: '100px',
     },
   },

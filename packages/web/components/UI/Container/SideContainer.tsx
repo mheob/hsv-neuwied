@@ -57,9 +57,7 @@ export default function SideContainer({ children, side = 'center', ...all }: Pro
         bgColor={theme.colors.white}
         boxShadow="md"
       >
-        <Box as="article" px={{ md: '24' }} py="12">
-          {children}
-        </Box>
+        {children}
       </Container>
     </Box>
   );

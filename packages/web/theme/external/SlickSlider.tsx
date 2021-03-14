@@ -1,4 +1,4 @@
-import { getRgbStringFromHex } from '../../utils/stylings';
+import { getRgbaStringFromHex } from '../../utils/stylings';
 import theme, { mediaQuery } from '../';
 
 export default `
@@ -171,7 +171,7 @@ export default `
         z-index: 1;
         width: ${theme.sizes.news.slider.arrowSizeMobile};
         height: ${theme.sizes.news.slider.arrowSizeMobile};
-        background-color: rgba(${getRgbStringFromHex(theme.colors.white)}, 0.85);
+        background-color: ${getRgbaStringFromHex(theme.colors.white, 0.85)};
         outline: none;
         transition: 0.1s ease-in transform;
 
@@ -211,7 +211,7 @@ export default `
       height: 6rem;
       padding: 1rem;
       color: white;
-      background-color: rgba(${getRgbStringFromHex(theme.colors.brand.base)}, 0.8);
+      background-color: ${getRgbaStringFromHex(theme.colors.brand.base, 0.8)};
       text-align: center;
       z-index: 1;
       

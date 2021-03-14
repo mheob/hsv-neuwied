@@ -57,18 +57,20 @@ export default function Partner({ ...all }: ChakraProps) {
         content: '""',
       }}
     >
-      <SectionHeader as="h2" mb="12" ml="36" fontSize="2xl">
-        Gönner &mdash; ohne euch geht nichts … Danke!
-      </SectionHeader>
+      <Box as="article" px={{ md: '24' }} py="12">
+        <SectionHeader as="h2" mb="12" ml="36" fontSize="2xl">
+          Gönner &mdash; ohne euch geht nichts … Danke!
+        </SectionHeader>
 
-      <Box pos="relative" mr="-28" px="32" cursor="grab" css={SlickSliderStyles}>
-        <Slider {...slickSettings}>
-          {shuffle(partnerList).map((partner) => (
-            <Box key={partner.id} p="0.5rem 0.75rem">
-              <img src={partner.image} alt={partner.name} />
-            </Box>
-          ))}
-        </Slider>
+        <Box pos="relative" mr="-28" px="32" cursor="grab" css={SlickSliderStyles}>
+          <Slider {...slickSettings}>
+            {shuffle(partnerList).map((partner) => (
+              <Box key={partner.id} p="0.5rem 0.75rem">
+                <img src={partner.image} alt={partner.name} />
+              </Box>
+            ))}
+          </Slider>
+        </Box>
       </Box>
     </SideContainer>
   );

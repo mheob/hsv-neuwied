@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import theme, { breakpoints } from '../../../theme';
-import { getRgbStringFromHex } from '../../../utils/stylings';
+import { getRgbaStringFromHex } from '../../../utils/stylings';
 import Container from '../../UI/Container';
 import SectionHeader from './SectionHeader';
 
@@ -31,7 +31,7 @@ export default function PageHeader({ bgImage, children, title, subtitle }: Props
         <Box
           pos={{ base: 'relative', lg: 'unset' }}
           _before={{
-            bgColor: `rgba(${getRgbStringFromHex(theme.colors.brand.light)}, 0.3)`,
+            bgColor: getRgbaStringFromHex(theme.colors.brand.light, 0.3),
             pos: 'absolute',
             w: { base: '100%', lg: '100vw' },
             h: { base: '100%', lg: '100vh' },

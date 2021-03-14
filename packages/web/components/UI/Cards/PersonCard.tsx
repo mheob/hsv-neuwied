@@ -1,6 +1,6 @@
 import { Box, ChakraProps, HStack, Icon, StackDivider } from '@chakra-ui/react';
 import Image from 'next/image';
-import { MdEmail, MdPhone } from 'react-icons/md';
+import { IoCall, IoMail } from 'react-icons/io5';
 
 import { PersonCard as PersonCardType } from '../../../models/person';
 import theme from '../../../theme';
@@ -40,7 +40,7 @@ export default function PersonCard({ person, ...all }: Props) {
             color={theme.colors.gray.light}
             _hover={{ color: theme.colors.brand.light }}
           >
-            <Icon as={MdEmail} w="10" transition="300ms ease height" _groupHover={{ h: '10' }} />
+            <Icon as={IoMail} w="10" transition="300ms ease height" _groupHover={{ h: '10' }} />
           </ContactLink>
         )}
 
@@ -55,7 +55,7 @@ export default function PersonCard({ person, ...all }: Props) {
             color={theme.colors.gray.light}
             _hover={{ color: theme.colors.brand.light }}
           >
-            <Icon as={MdPhone} w="10" transition="300ms ease height" _groupHover={{ h: '10' }} />
+            <Icon as={IoCall} w="10" transition="300ms ease height" _groupHover={{ h: '10' }} />
           </ContactLink>
         )}
       </HStack>

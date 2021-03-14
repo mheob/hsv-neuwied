@@ -26,7 +26,13 @@ export default function Contact({ ...all }: ChakraProps) {
 
   return (
     <SideContainer {...all} side="right">
-      <Stack direction={{ base: 'column', xl: 'row' }} spacing="16">
+      <Stack
+        as="article"
+        direction={{ base: 'column', xl: 'row' }}
+        spacing="16"
+        px={{ md: '24' }}
+        py="12"
+      >
         <Box as="article" w={{ xl: '28rem' }}>
           <SectionHeader fontSize="2xl">Fragen? Ansprechen!</SectionHeader>
 

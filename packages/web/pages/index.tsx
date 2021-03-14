@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import styled from 'styled-components';
 
 import Button from '../components/Forms/Button';
 import Layout from '../components/Layout';
@@ -9,7 +9,20 @@ import Partner from '../components/Pages/Landing/Partner';
 import PageHeader from '../components/UI/Header/PageHeader';
 import articleList from '../data/articles.json';
 import { useMediaQuery } from '../hooks/useMediaQuery';
+import { mediaQuery } from '../styles';
 import { breakpoints } from '../theme';
+
+const P = styled.p`
+  font-size: 1.25rem;
+
+  &:not(:first-of-type) {
+    margin-top: 0.75rem;
+  }
+
+  ${mediaQuery('xl')} {
+    font-size: 1.5rem;
+  }
+`;
 
 export default function Index() {
   const { isMobile } = useMediaQuery(breakpoints.lg);
@@ -21,13 +34,8 @@ export default function Index() {
         subtitle="in und für Neuwied"
         bgImage="/images/pages/hsv-neuwied-hero-landing.jpg"
       >
-        <Text fontSize={{ base: 'xl', xl: '2xl' }}>
-          Du willst mehr über das Angebot und die Aktivitäten vom HSV&nbsp;Neuwied wissen?
-        </Text>
-
-        <Text fontSize={{ base: 'xl', xl: '2xl' }} mt="3">
-          Dann bleib auf dem Laufenden! In und für Neuwied.
-        </Text>
+        <P>Du willst mehr über das Angebot und die Aktivitäten vom HSV&nbsp;Neuwied wissen?</P>
+        <P>Dann bleib auf dem Laufenden! In und für Neuwied.</P>
 
         <Button size="lg" mt="8">
           Mehr erfahren

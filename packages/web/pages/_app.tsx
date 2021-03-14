@@ -1,17 +1,16 @@
-import { ChakraProvider } from '@chakra-ui/react';
 import { AppProps } from 'next/app';
+import { ThemeProvider } from 'styled-components';
 
 import { RootContextProvider } from '../store/RootContext';
-import theme from '../theme';
-import Styles from '../theme/styles';
+import GlobalStyles, { theme } from '../styles';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <RootContextProvider>
-      <ChakraProvider resetCSS theme={theme}>
-        <Styles />
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
         <Component {...pageProps} />
-      </ChakraProvider>
+      </ThemeProvider>
     </RootContextProvider>
   );
 }

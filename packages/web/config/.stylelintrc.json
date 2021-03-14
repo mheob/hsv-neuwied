@@ -1,0 +1,3 @@
+{
+  "extends": ["../../../config/.stylelintrc.json", "stylelint-config-styled-components"]
+}

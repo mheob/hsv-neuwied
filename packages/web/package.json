@@ -8,7 +8,9 @@
     "build": "next build",
     "dev": "next",
     "format": "prettier --write . --loglevel warn --ignore-path '.gitignore'",
-    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "lint": "yarn lint:js && yarn lint:style",
+    "lint:js": "eslint . --ext ts --ext tsx --ext js",
+    "lint:style": "stylelint '**/*.{css,scss,js,ts,tsx}' --fix",
     "semantic-release": "semantic-release",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
@@ -20,6 +22,9 @@
   },
   "eslintConfig": {
     "extends": "./config/.eslintrc.json"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.6",
@@ -33,6 +38,7 @@
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
     "react-slick": "^0.28.1",
+    "styled-components": "^5.2.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {
@@ -41,9 +47,12 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.2",
     "@types/react-slick": "^0.23.4",
+    "@types/styled-components": "^5.1.8",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
+    "babel-plugin-styled-components": "^1.12.0",
     "eslint-plugin-react": "^7.22.0",
+    "stylelint-config-styled-components": "^0.1.1",
     "typescript": "^4.2.3"
   },
   "publishConfig": {

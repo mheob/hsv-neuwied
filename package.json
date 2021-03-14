@@ -42,6 +42,9 @@
   "eslintConfig": {
     "extends": "./config/.eslintrc.json"
   },
+  "stylelint": {
+    "extends": "./config/.stylelintrc.json"
+  },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
@@ -53,6 +56,8 @@
     "import-sort": "^6.0.0",
     "import-sort-parser-typescript": "^6.0.0",
     "prettier": "^2.2.1",
+    "stylelint": "^13.12.0",
+    "stylelint-config-recommended": "^4.0.0",
     "typescript": "^4.2.3"
   },
   "hintConfig": {

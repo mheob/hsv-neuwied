@@ -1,12 +1,115 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
 
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import theme, { breakpoints } from '../../../theme';
+import { mediaQuery } from '../../../styles';
 import { getRgbaStringFromHex } from '../../../utils/stylings';
 import Container from '../../UI/Container';
 import SectionHeader from './SectionHeader';
+
+const Section = styled.section`
+  position: relative;
+  margin-bottom: 3rem;
+
+  ${mediaQuery('lg')} {
+    height: 100vh;
+  }
+`;
+
+const InnerStyled = styled.div`
+  position: relative;
+  margin-top: -15%;
+
+  ${mediaQuery('lg')} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin-top: ${({ theme }) => `calc(-${theme.sizes.header.height} + 2.5vw)`};
+  }
+`;
+
+const ImageBox = styled.div`
+  position: relative;
+
+  &::before {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: ${({ theme }) => getRgbaStringFromHex(theme.colors.brand.light, 0.3)};
+    content: '';
+  }
+
+  ${mediaQuery('lg')} {
+    position: unset;
+
+    &::before {
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+`;
+
+const ContainerStyled = styled(Container)`
+  position: relative;
+  height: 100%;
+`;
+
+const Header = styled.h1`
+  margin-top: 2rem;
+  color: ${({ theme }) => theme.colors.brand.dark};
+  font-size: ${({ theme }) => theme.sizes.font['2xl']};
+  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+  font-family: ${({ theme }) => theme.fontFamily.brand};
+  text-align: center;
+
+  ${mediaQuery('sm')} {
+    font-size: ${({ theme }) => theme.sizes.font['3xl']};
+  }
+
+  ${mediaQuery('md')} {
+    font-size: ${({ theme }) => theme.sizes.font['4xl']};
+  }
+`;
+
+const Subtitle = styled.span`
+  display: block;
+  font-size: ${({ theme }) => theme.sizes.font.lg};
+
+  ${mediaQuery('sm')} {
+    font-size: ${({ theme }) => theme.sizes.font.xl};
+  }
+
+  ${mediaQuery('md')} {
+    font-size: ${({ theme }) => theme.sizes.font['2xl']};
+  }
+`;
+
+const Article = styled.article`
+  position: absolute;
+  right: 0;
+  bottom: -12rem;
+  left: 0;
+  z-index: 2;
+  margin: 1rem;
+  padding: 2.5rem 5rem;
+  background-color: white;
+  box-shadow: ${({ theme }) => theme.shadows.md};
+
+  ${mediaQuery('2xl')} {
+    width: 67%;
+  }
+`;
+const SectionHeaderStyled = styled(SectionHeader)`
+  font-size: ${({ theme }) => theme.sizes.font['3xl']};
+
+  ${mediaQuery('xl')} {
+    font-size: ${({ theme }) => theme.sizes.font['4xl']};
+  }
+`;
 
 type Props = {
   bgImage: string;
@@ -16,77 +119,36 @@ type Props = {
 };
 
 export default function PageHeader({ bgImage, children, title, subtitle }: Props) {
-  const { isMobile } = useMediaQuery(breakpoints.lg);
+  const isMobile = useMediaQuery('lg');
 
   return (
-    <Box as="section" pos="relative" h={{ lg: '100vh' }} mb="12">
-      <Box
-        pos={{ base: 'relative', lg: 'absolute' }}
-        top="0"
-        left="0"
-        w={{ lg: '100vw' }}
-        h={{ lg: '100vh' }}
-        mt={{ base: '-15%', lg: `calc(-${theme.sizes.header.height} + 2.5vw)` }}
-      >
-        <Box
-          pos={{ base: 'relative', lg: 'unset' }}
-          _before={{
-            bgColor: getRgbaStringFromHex(theme.colors.brand.light, 0.3),
-            pos: 'absolute',
-            w: { base: '100%', lg: '100vw' },
-            h: { base: '100%', lg: '100vh' },
-            zIndex: '1',
-            content: '""',
-          }}
-        >
+    <Section>
+      <InnerStyled>
+        <ImageBox>
           {isMobile ? (
             <Image src={bgImage} width={1000} height={563} layout="responsive" />
           ) : (
             <Image src={bgImage} layout="fill" objectFit="cover" />
           )}
-        </Box>
+        </ImageBox>
 
-        <Container pos="relative" h="full">
+        <ContainerStyled>
           {isMobile ? (
-            <Heading
-              as="h1"
-              mt="8"
-              fontFamily="brand"
-              fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}
-              color="brand.dark"
-              textAlign="center"
-            >
+            <Header>
               {title}
-              {subtitle && (
-                <Text as="span" d="block" fontSize={{ base: 'lg', sm: 'xl', md: '2xl' }}>
-                  {subtitle}
-                </Text>
-              )}
-            </Heading>
+              {subtitle && <Subtitle>{subtitle}</Subtitle>}
+            </Header>
           ) : (
-            <Box
-              as="article"
-              pos="absolute"
-              right="0"
-              bottom="-12rem"
-              left="0"
-              w={{ '2xl': '67%' }}
-              m="4"
-              px="20"
-              py="10"
-              bgColor="white"
-              boxShadow="md"
-              zIndex="2"
-            >
-              <SectionHeader as="h1" fontSize={{ base: '3xl', xl: '4xl' }}>
+            <Article>
+              <SectionHeaderStyled as="h1">
                 {/* \u2014 == &mdash; */}
                 {title} {subtitle && `\u2014 ${subtitle}`}
-              </SectionHeader>
+              </SectionHeaderStyled>
               {children}
-            </Box>
+            </Article>
           )}
-        </Container>
-      </Box>
-    </Box>
+        </ContainerStyled>
+      </InnerStyled>
+    </Section>
   );
 }

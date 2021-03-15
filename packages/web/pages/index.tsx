@@ -10,22 +10,21 @@ import PageHeader from '../components/UI/Header/PageHeader';
 import articleList from '../data/articles.json';
 import { useMediaQuery } from '../hooks/useMediaQuery';
 import { mediaQuery } from '../styles';
-import { breakpoints } from '../theme';
 
 const P = styled.p`
-  font-size: 1.25rem;
+  font-size: ${({ theme }) => theme.sizes.font.xl};
 
-  &:not(:first-of-type) {
+  & + p {
     margin-top: 0.75rem;
   }
 
   ${mediaQuery('xl')} {
-    font-size: 1.5rem;
+    font-size: ${({ theme }) => theme.sizes.font.xl};
   }
 `;
 
 export default function Index() {
-  const { isMobile } = useMediaQuery(breakpoints.lg);
+  // const { isMobile } = useMediaQuery(breakpoints.lg);
 
   return (
     <Layout title="Home &mdash; HSV Neuwied">
@@ -37,18 +36,18 @@ export default function Index() {
         <P>Du willst mehr über das Angebot und die Aktivitäten vom HSV&nbsp;Neuwied wissen?</P>
         <P>Dann bleib auf dem Laufenden! In und für Neuwied.</P>
 
-        <Button size="lg" mt="8">
+        <Button size="large" mt="8">
           Mehr erfahren
         </Button>
       </PageHeader>
 
-      <Matches mt={{ base: '16', md: '32', xl: '48' }} />
+      {/* <Matches mt={{ base: '16', md: '32', xl: '48' }} />
 
       <NewsSlider articleList={articleList.slice(0, 5)} mt={{ base: '16', md: '32', xl: '48' }} />
 
       <Contact mt={{ base: '16', md: '32', xl: '48' }} />
 
-      {!isMobile && <Partner mt={{ md: '32', xl: '48' }} />}
+      {!isMobile && <Partner mt={{ md: '32', xl: '48' }} />} */}
     </Layout>
   );
 }

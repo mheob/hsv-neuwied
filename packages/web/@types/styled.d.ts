@@ -1,4 +1,4 @@
-import 'styled-components';
+import { CSSProp } from 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -41,6 +41,21 @@ declare module 'styled-components' {
     };
 
     sizes: {
+      font: {
+        xs: string;
+        sm: string;
+        md: string;
+        lg: string;
+        xl: string;
+        '2xl': string;
+        '3xl': string;
+        '4xl': string;
+        '5xl': string;
+        '6xl': string;
+        '7xl': string;
+        '8xl': string;
+        '9xl': string;
+      };
       footer: {
         height: number;
       };
@@ -56,5 +71,11 @@ declare module 'styled-components' {
         };
       };
     };
+  }
+}
+
+declare module 'react' {
+  interface Attributes {
+    css?: CSSProp;
   }
 }

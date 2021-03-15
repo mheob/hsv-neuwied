@@ -1,34 +1,34 @@
-import { Heading, HeadingProps } from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import { css } from 'styled-components';
+
+const spacerStyle = (isDarkSpacer: boolean) => css`
+  &::after {
+    display: block;
+    width: 4.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid;
+    border-bottom-color: ${isDarkSpacer ? 'brand.dark' : 'brand.base'};
+    content: '';
+  }
+`;
 
 type Props = {
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  children?: ReactNode;
   hideSpacer?: boolean;
   isDarkSpacer?: boolean;
-} & HeadingProps;
+};
 
 export default function SectionHeader({
+  as = 'h2',
   children,
   hideSpacer = false,
   isDarkSpacer = false,
-  ...all
 }: Props) {
+  const HeaderTag = as;
+
   return (
-    <Heading
-      {...(!hideSpacer
-        ? {
-            _after: {
-              d: 'block',
-              w: '4.5rem',
-              mb: '2rem',
-              pb: '0.5rem',
-              borderBottom: '2px solid',
-              borderBottomColor: isDarkSpacer ? 'brand.dark' : 'brand.base',
-              content: '""',
-            },
-          }
-        : {})}
-      {...all}
-    >
-      {children}
-    </Heading>
+    <HeaderTag {...(!hideSpacer ? { css: spacerStyle(isDarkSpacer) } : {})}>{children}</HeaderTag>
   );
 }

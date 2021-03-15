@@ -1,23 +1,44 @@
-import { Container, ContainerProps } from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
 
-import { breakpoints } from '../../../theme';
-import { getBreakpointInRemAsInteger } from '../../../theme/foundations/breakpoints';
+import { breakpoints, mediaQuery } from '../../../styles';
 
-export default function index({ children, ...all }: ContainerProps) {
-  return (
-    <Container
-      maxW={{
-        base: breakpoints.sm,
-        sm: `${getBreakpointInRemAsInteger('sm') - 2.5}rem`,
-        md: `${getBreakpointInRemAsInteger('md') - 2.5}rem`,
-        lg: `${getBreakpointInRemAsInteger('lg') - 2.5}rem`,
-        xl: `${getBreakpointInRemAsInteger('xl') - 2.5}rem`,
-        '2xl': `${getBreakpointInRemAsInteger('2xl') - 2.5}rem`,
-        '3xl': `${getBreakpointInRemAsInteger('3xl') - 2.5}rem`,
-      }}
-      {...all}
-    >
-      {children}
-    </Container>
-  );
+const Container = styled.div`
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+
+  ${mediaQuery('sm')} {
+    max-width: ${breakpoints.sm}px;
+  }
+
+  ${mediaQuery('md')} {
+    max-width: ${breakpoints.md}px;
+  }
+
+  ${mediaQuery('lg')} {
+    max-width: ${breakpoints.lg}px;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  ${mediaQuery('xl')} {
+    max-width: ${breakpoints.xl}px;
+  }
+
+  ${mediaQuery('2xl')} {
+    max-width: ${breakpoints['2xl']}px;
+  }
+
+  ${mediaQuery('3xl')} {
+    max-width: ${breakpoints['3xl']}px;
+  }
+`;
+
+type Props = { children: ReactNode };
+
+export default function index({ children }: Props) {
+  return <Container>{children}</Container>;
 }

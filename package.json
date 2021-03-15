@@ -19,11 +19,11 @@
     ]
   },
   "scripts": {
+    "prepare": "husky install ./config/husky",
     "build": "yarn workspaces run build",
     "dev": "yarn workspaces run dev",
     "format": "yarn workspaces run format",
     "lint": "yarn workspaces run lint",
-    "prepare": "husky install ./config/husky && yarn workspaces run prepare",
     "semantic-release": "yarn workspaces run semantic-release",
     "start": "yarn workspaces run start",
     "type-check": "yarn workspaces run type-check"

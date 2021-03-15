@@ -52,6 +52,6 @@
     "access": "restricted"
   },
   "release": {
-    "extends": "./config/.releaserc.json"
+    "extends": "./config/release.config.js"
   }
 }

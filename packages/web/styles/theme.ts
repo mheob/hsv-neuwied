@@ -32,15 +32,30 @@ export const theme: DefaultTheme = {
   },
 
   shadows: {
-    xs: 'box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);',
-    sm: 'box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);',
-    md: 'box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);',
-    lg: 'box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);',
-    xl: 'box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);',
-    '2xl': 'box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);',
+    xs: '0 0 0 1px rgba(0, 0, 0, 0.05)',
+    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+    '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
   },
 
   sizes: {
+    font: {
+      xs: '0.75rem',
+      sm: '0.875rem',
+      md: '1rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+      '6xl': '3.75rem',
+      '7xl': '4.5rem',
+      '8xl': '6rem',
+      '9xl': '8rem',
+    },
     footer: {
       height: 200, // px
     },
@@ -56,25 +71,4 @@ export const theme: DefaultTheme = {
       },
     },
   },
-};
-
-export const breakpoints = {
-  sm: 480,
-  md: 768,
-  lg: 992,
-  xl: 1280,
-  '2xl': 1536,
-  '3xl': 1921,
-};
-
-export const mediaQuery = (breakPoint: keyof typeof breakpoints) => {
-  // @ts-ignore
-  const breakPointArray = Object.keys(breakpoints).map((key) => [key, breakpoints[key]]);
-
-  const [result] = breakPointArray.reduce((acc, [name, size]) => {
-    if (breakPoint === name) return [...acc, `@media (min-width: ${size}px)`];
-    return acc;
-  }, []);
-
-  return result as string;
 };

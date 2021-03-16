@@ -1,7 +1,33 @@
-import { getRgbaStringFromHex } from '../../utils/stylings';
-import theme, { mediaQuery } from '../';
+import { css } from 'styled-components';
 
-export default `
+import { getRgbaStringFromHex } from '../../utils/stylings';
+import { mediaQuery } from '../';
+import { theme } from '../theme';
+
+export default css`
+  .slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+
+    [dir='rtl'] & {
+      float: right;
+    }
+
+    img {
+      display: block;
+    }
+
+    &.slick-loading img {
+      display: none;
+    }
+
+    &.dragging img {
+      pointer-events: none;
+    }
+  }
+
   .slick-slider {
     display: block;
     box-sizing: border-box;
@@ -70,29 +96,6 @@ export default `
     transform: translate3d(0, 0, 0);
   }
 
-  .slick-slide {
-    display: none;
-    float: left;
-    height: 100%;
-    min-height: 1px;
-
-    [dir='rtl'] & {
-      float: right;
-    }
-
-    img {
-      display: block;
-    }
-
-    &.slick-loading img {
-      display: none;
-    }
-
-    &.dragging img {
-      pointer-events: none;
-    }
-  }
-
   .slick-arrow.slick-hidden {
     display: none;
   }
@@ -144,6 +147,7 @@ export default `
         position: relative;
       }
 
+      /* stylelint-disable no-descending-specificity */
       &-slide {
         position: relative;
 
@@ -152,40 +156,42 @@ export default `
           right: 0;
           left: 0;
           width: 100vw;
-          height: ${theme.sizes.news.slider.imageHeightMobile};
+          height: ${theme.sizes.news.slider.imageHeightMobile}vh;
           object-fit: cover;
           object-position: 50% 60%;
           pointer-events: none;
 
           ${mediaQuery('sm')} {
-            height: ${theme.sizes.news.slider.imageHeight};
+            height: ${theme.sizes.news.slider.imageHeight}vh;
           }
         }
       }
+      /* stylelint-enable no-descending-specificity */
 
       &-arrow {
         position: absolute;
-        top: calc((${theme.sizes.news.slider.imageHeightMobile} - ${
-  theme.sizes.news.slider.arrowSize
-}) / 2);
+        top: calc(
+          (${theme.sizes.news.slider.imageHeightMobile}vh - ${theme.sizes.news.slider.arrowSize}px) /
+            2
+        );
         z-index: 1;
-        width: ${theme.sizes.news.slider.arrowSizeMobile};
-        height: ${theme.sizes.news.slider.arrowSizeMobile};
-        background-color: ${getRgbaStringFromHex(theme.colors.white, 0.85)};
+        width: ${theme.sizes.news.slider.arrowSizeMobile}px;
+        height: ${theme.sizes.news.slider.arrowSizeMobile}px;
+        background-color: rgba(255, 255, 255, 0.85);
         outline: none;
         transition: 0.1s ease-in transform;
 
         ${mediaQuery('sm')} {
-        top: calc((${theme.sizes.news.slider.imageHeight} - ${
-  theme.sizes.news.slider.arrowSize
-}) / 2);
-        width: ${theme.sizes.news.slider.arrowSize};
-        height: ${theme.sizes.news.slider.arrowSize};
+          top: calc(
+            (${theme.sizes.news.slider.imageHeight}vh - ${theme.sizes.news.slider.arrowSize}px) / 2
+          );
+          width: ${theme.sizes.news.slider.arrowSize}px;
+          height: ${theme.sizes.news.slider.arrowSize}px;
         }
       }
 
       &-prev {
-        left: -${+theme.sizes.news.slider.arrowSize.slice(0, -2) / 2}px;
+        left: -${+theme.sizes.news.slider.arrowSize / 2}px;
         border-radius: 0 50px 50px 0;
 
         &:hover {
@@ -194,7 +200,7 @@ export default `
       }
 
       &-next {
-        right: -${+theme.sizes.news.slider.arrowSize.slice(0, -2) / 2}px;
+        right: -${+theme.sizes.news.slider.arrowSize / 2}px;
         border-radius: 50px 0 0 50px;
 
         &:hover {
@@ -205,19 +211,19 @@ export default `
 
     .teaser {
       position: absolute;
-      left: 0;
       bottom: calc(5vh);
+      left: 0;
+      z-index: 1;
       width: 100%;
       height: 6rem;
       padding: 1rem;
       color: white;
-      background-color: ${getRgbaStringFromHex(theme.colors.brand.base, 0.8)};
       text-align: center;
-      z-index: 1;
-      
+      background-color: ${getRgbaStringFromHex(theme.colors.brand.base, 0.8)};
+
       ${mediaQuery('md')} {
-        left: 100px;
         bottom: 0;
+        left: 100px;
         width: 55%;
         min-width: 40rem;
         height: 35vh;

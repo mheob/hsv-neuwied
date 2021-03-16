@@ -35,6 +35,18 @@ const MatchesStyled = styled(Matches)`
   }
 `;
 
+const NewsSliderStyled = styled(NewsSlider)`
+  margin-top: 4rem;
+
+  ${mediaQuery('md')} {
+    margin-top: 8rem;
+  }
+
+  ${mediaQuery('xl')} {
+    margin-top: 12rem;
+  }
+`;
+
 export default function Index() {
   // const { isMobile } = useMediaQuery(breakpoints.lg);
 
@@ -48,16 +60,16 @@ export default function Index() {
         <P>Du willst mehr über das Angebot und die Aktivitäten vom HSV&nbsp;Neuwied wissen?</P>
         <P>Dann bleib auf dem Laufenden! In und für Neuwied.</P>
 
-        <Button size="large" mt="8">
+        <Button size="large" mt="1rem">
           Mehr erfahren
         </Button>
       </PageHeader>
 
       <MatchesStyled />
 
-      {/* 
-      <NewsSlider articleList={articleList.slice(0, 5)} mt={{ base: '16', md: '32', xl: '48' }} />
+      <NewsSliderStyled articleList={articleList.slice(0, 5)} />
 
+      {/* 
       <Contact mt={{ base: '16', md: '32', xl: '48' }} />
 
     {!isMobile && <Partner mt={{ md: '32', xl: '48' }} />}

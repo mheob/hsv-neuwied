@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { mediaQuery, theme } from '.';
+import { theme } from './theme';
+import { mediaQuery } from '.';
 
 export default createGlobalStyle`
   ::selection {

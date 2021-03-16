@@ -67,6 +67,7 @@ declare module 'styled-components' {
         slider: {
           imageHeightMobile: number;
           imageHeight: number;
+          arrowSizeMobile: number;
           arrowSize: number;
         };
       };

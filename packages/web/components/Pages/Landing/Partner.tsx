@@ -6,8 +6,8 @@ import { IconType } from 'react-icons/lib';
 import Slider, { Settings } from 'react-slick';
 
 import partnerList from '../../../data/partner.json';
+import SlickSliderStyles from '../../../styles/external/SlickSlider';
 import theme from '../../../theme';
-import SlickSliderStyles from '../../../theme/external/SlickSlider';
 import { shuffle } from '../../../utils/array';
 import SideContainer from '../../UI/Container/SideContainer';
 import SectionHeader from '../../UI/Header/SectionHeader';

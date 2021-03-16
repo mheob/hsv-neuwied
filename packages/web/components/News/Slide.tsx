@@ -1,79 +1,95 @@
-import { Box, Flex, Link, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import styled from 'styled-components';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { Article } from '../../models/news';
-import theme, { breakpoints } from '../../theme';
+import { mediaQuery } from '../../styles';
 import Button from '../Forms/Button';
 import SectionHeader from '../UI/Header/SectionHeader';
+
+const Article = styled.article`
+  cursor: grab;
+  height: ${({ theme }) => theme.sizes.news.slider.imageHeightMobile + 5}vh;
+
+  ${mediaQuery('sm')} {
+    height: ${({ theme }) => theme.sizes.news.slider.imageHeight + 5}vh;
+  }
+`;
+
+const Teaser = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  ${mediaQuery('md')} {
+    justify-content: space-between;
+  }
+`;
+
+const SectionHeaderStyled = styled(SectionHeader)`
+  font-size: ${({ theme }) => theme.sizes.font.lg};
+  font-weight: bold;
+
+  ${mediaQuery('md')} {
+    font-size: ${({ theme }) => theme.sizes.font.xl};
+  }
+`;
+
+const Title = styled.a`
+  color: white;
+  line-height: 1.625;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.brand.light};
+  }
+`;
+
+const Excerpt = styled.p`
+  margin-top: -1rem;
+  font-size: ${({ theme }) => theme.sizes.font.lg};
+`;
+
+const ButtonStyled = styled(Button)`
+  margin-top: 1rem;
+  align-self: flex-start;
+`;
 
 type Props = { article: Article };
 
 export default function Slide({ article }: Props) {
-  const { isMobile } = useMediaQuery(breakpoints.md);
+  const isMobile = useMediaQuery('md');
+
+  // TODO: Check if the href is correct
+  // (see: https://nextjs.org/docs/api-reference/next/link#with-url-object)
+  const linkToArticle = `/${
+    Array.isArray(article.category) ? article.category[0].slug : article.category.slug
+  }/${article.slug}`;
 
   return (
-    <Box
-      as="article"
-      cursor="grab"
-      h={{
-        base: `${+theme.sizes.news.slider.imageHeightMobile.slice(0, -2) + 5}vh`,
-        sm: `${+theme.sizes.news.slider.imageHeight.slice(0, -2) + 5}vh`,
-      }}
-    >
+    <Article>
       {/*
         // TODO: Use the NextJS Image component
         //       (currently styled in /theme/external/SlickSlider.tsx)
       */}
       <img src={article.featuredImage.src} alt={article.featuredImage.alt} />
 
-      <Flex
-        className="teaser"
-        direction="column"
-        justifyContent={{ base: 'center', md: 'space-between' }}
-      >
-        <SectionHeader
-          as="h3"
-          isDarkSpacer
-          hideSpacer={isMobile}
-          fontSize={{ base: 'lg', md: 'xl' }}
-          fontWeight="bold"
-        >
-          <NextLink
-            // TODO: Check if the href is correct
-            // (see: https://nextjs.org/docs/api-reference/next/link#with-url-object)
-            href={`/${
-              Array.isArray(article.category) ? article.category[0].slug : article.category.slug
-            }/${article.slug}`}
-            passHref
-          >
-            <Link color="white" _hover={{ color: 'brand.light' }} lineHeight="tall">
-              {article.title}
-            </Link>
+      <Teaser>
+        <SectionHeaderStyled hideSpacer={isMobile} isDarkSpacer>
+          <NextLink href={linkToArticle}>
+            <Title>{article.title}</Title>
           </NextLink>
-        </SectionHeader>
+        </SectionHeaderStyled>
 
         {!isMobile && (
           <>
-            <Text mt="-4" fontSize="lg">
-              {article.teaser}
-            </Text>
+            <Excerpt>{article.teaser}</Excerpt>
 
-            <NextLink
-              // TODO: Check if the href is correct
-              // (see: https://nextjs.org/docs/api-reference/next/link#with-url-object)
-              href={`/${
-                Array.isArray(article.category) ? article.category[0].slug : article.category.slug
-              }/${article.slug}`}
-              passHref
-            >
-              <Button colorScheme="dark" mt="4" alignSelf="flex-start">
-                alles erfahren
-              </Button>
+            <NextLink href={linkToArticle}>
+              <ButtonStyled colorScheme="dark">alles erfahren</ButtonStyled>
             </NextLink>
           </>
         )}
-      </Flex>
-    </Box>
+      </Teaser>
+    </Article>
   );
 }

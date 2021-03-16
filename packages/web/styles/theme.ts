@@ -67,6 +67,7 @@ export const theme: DefaultTheme = {
       slider: {
         imageHeightMobile: 50, // vh
         imageHeight: 70, // vh
+        arrowSizeMobile: 80, // px
         arrowSize: 100, // px
       },
     },

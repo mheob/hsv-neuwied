@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
-import { mediaQuery } from '../../../styles';
+import { Breakpoint, getTopSpacing, mediaQuery } from '../../../styles';
 import Button from '../../Forms/Button';
 import Container from '../../UI/Container';
 import SectionHeader from '../../UI/Header/SectionHeader';
 import Match from './Match';
 
-const Section = styled.section`
+type SectionProps = {
+  mt?: string | { [key in Breakpoint]?: string };
+};
+
+const Section = styled.section<SectionProps>`
   position: relative;
 
   &::after {
@@ -20,9 +24,11 @@ const Section = styled.section`
     opacity: 0.05;
     content: '';
   }
+
+  ${({ mt }) => mt && getTopSpacing(mt)}
 `;
 
-const ContainerStyled = styled(Container)`
+const MatchesContainer = styled(Container)`
   ${mediaQuery('xl')} {
     margin-right: -5%;
     margin-left: 5%;
@@ -76,10 +82,12 @@ const MatchesGrid = styled.div`
   }
 `;
 
-export default function Matches() {
+type Props = SectionProps;
+
+export default function Matches({ mt }: Props) {
   return (
-    <Section>
-      <ContainerStyled>
+    <Section mt={mt}>
+      <MatchesContainer>
         <Header>
           <SectionHeaderStyled>Aktuelle Spiele vom HSV</SectionHeaderStyled>
 
@@ -93,7 +101,7 @@ export default function Matches() {
           <Match />
           <Match isNextMatch />
         </MatchesGrid>
-      </ContainerStyled>
+      </MatchesContainer>
     </Section>
   );
 }

@@ -23,30 +23,6 @@ const P = styled.p`
   }
 `;
 
-const MatchesStyled = styled(Matches)`
-  margin-top: 4rem;
-
-  ${mediaQuery('md')} {
-    margin-top: 8rem;
-  }
-
-  ${mediaQuery('xl')} {
-    margin-top: 12rem;
-  }
-`;
-
-const NewsSliderStyled = styled(NewsSlider)`
-  margin-top: 4rem;
-
-  ${mediaQuery('md')} {
-    margin-top: 8rem;
-  }
-
-  ${mediaQuery('xl')} {
-    margin-top: 12rem;
-  }
-`;
-
 export default function Index() {
   // const { isMobile } = useMediaQuery(breakpoints.lg);
 
@@ -65,15 +41,18 @@ export default function Index() {
         </Button>
       </PageHeader>
 
-      <MatchesStyled />
+      <Matches mt={{ base: '4rem', md: '8rem', xl: '12rem' }} />
 
-      <NewsSliderStyled articleList={articleList.slice(0, 5)} />
+      <NewsSlider
+        articleList={articleList.slice(0, 5)}
+        mt={{ base: '4rem', md: '8rem', xl: '12rem' }}
+      />
 
       {/* 
-      <Contact mt={{ base: '16', md: '32', xl: '48' }} />
+      <Contact mt={{ base: '4rem', md: '8rem', xl: '12rem' }} />
 
-    {!isMobile && <Partner mt={{ md: '32', xl: '48' }} />}
-    */}
+      {!isMobile && <Partner mt={{ md: '8rem', xl: '12rem' }} />}
+      */}
     </Layout>
   );
 }

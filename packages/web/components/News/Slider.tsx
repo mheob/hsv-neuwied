@@ -5,7 +5,7 @@ import Slider, { Settings } from 'react-slick';
 import styled, { css } from 'styled-components';
 
 import { Article } from '../../models/news';
-import { mediaQuery } from '../../styles';
+import { Breakpoint, getTopSpacing, mediaQuery } from '../../styles';
 import SlickSliderStyles from '../../styles/external/SlickSlider';
 import Slide from './Slide';
 
@@ -30,8 +30,14 @@ const IconNext = styled(IoChevronForward)`
   margin-right: 2.5rem;
 `;
 
-const Section = styled.section`
+type SectionProps = {
+  mt?: string | { [key in Breakpoint]?: string };
+};
+
+const Section = styled.section<SectionProps>`
   ${SlickSliderStyles}
+
+  ${({ mt }) => mt && getTopSpacing(mt)}
 `;
 
 type ArrowIconProps = {
@@ -47,9 +53,9 @@ export function ArrowIconButton({ ariaLabel, type, className, onClick }: ArrowIc
   );
 }
 
-type Props = { articleList: Article[] };
+type Props = { articleList: Article[] } & SectionProps;
 
-export default function NewsSlider({ articleList }: Props) {
+export default function NewsSlider({ articleList, mt }: Props) {
   const slickSettings: Settings = {
     dots: true,
     autoplay: true,
@@ -62,7 +68,7 @@ export default function NewsSlider({ articleList }: Props) {
   };
 
   return (
-    <Section className="news-slider">
+    <Section className="news-slider" mt={mt}>
       <Slider {...slickSettings}>
         {articleList.map((article) => (
           <Slide key={article.id} article={article} />

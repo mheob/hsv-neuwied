@@ -1,16 +1,103 @@
-import { Box, ChakraProps, Icon } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 import { HtmlHTMLAttributes } from 'react';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import { IconType } from 'react-icons/lib';
 import Slider, { Settings } from 'react-slick';
+import styled, { css } from 'styled-components';
 
 import partnerList from '../../../data/partner.json';
+import { Breakpoint, mediaQuery } from '../../../styles';
 import SlickSliderStyles from '../../../styles/external/SlickSlider';
-import theme from '../../../theme';
 import { shuffle } from '../../../utils/array';
 import SideContainer from '../../UI/Container/SideContainer';
 import SectionHeader from '../../UI/Header/SectionHeader';
+
+const iconStyles = css`
+  width: 2rem;
+  height: 2rem;
+  color: white;
+
+  ${mediaQuery('sm')} {
+    width: 3rem;
+    height: 3rem;
+  }
+`;
+
+const IconPrev = styled(IoChevronBack)`
+  ${iconStyles}
+  margin-left: 2.5rem;
+`;
+
+const IconNext = styled(IoChevronForward)`
+  ${iconStyles}
+  margin-right: 2.5rem;
+`;
+
+const SideContainerStyled = styled(SideContainer)`
+  &::after {
+    position: absolute;
+    right: -80px;
+    bottom: -50px;
+    z-index: -1;
+    width: 300px;
+    height: ${300 * 2.7375}px;
+    background: url('/images/silhouettes/dancing/lifting-figure.svg') no-repeat;
+    transform: scaleX(-1);
+    opacity: 0.05;
+    content: '';
+  }
+`;
+
+const Article = styled.article`
+  padding: 3rem 0;
+
+  ${mediaQuery('md')} {
+    padding: 3rem 6rem;
+  }
+`;
+
+const SectionHeaderStyled = styled(SectionHeader)`
+  margin-bottom: 3rem;
+  margin-left: 9rem;
+  font-size: ${({ theme }) => theme.sizes.font['2xl']};
+`;
+
+const SliderContainer = styled.div`
+  ${SlickSliderStyles}
+
+  position: relative;
+  margin-right: -7rem;
+  padding: 0 8rem;
+  cursor: grab;
+`;
+
+const ImageContainer = styled.div`
+  padding: 0.5rem 0.75rem;
+`;
+
+const Button = styled.button`
+  position: absolute;
+  top: calc(50% - ${({ theme }) => theme.sizes.news.slider.arrowSize} / 2);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${({ theme }) => theme.sizes.news.slider.arrowSize};
+  height: ${({ theme }) => theme.sizes.news.slider.arrowSize};
+  background-color: ${({ theme }) => theme.colors.brand.base};
+  border-radius: 100%;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &.slick-prev {
+    left: -${({ theme }) => theme.sizes.news.slider.arrowSize / 2}px;
+  }
+
+  &.slick-next {
+    right: -${({ theme }) => theme.sizes.news.slider.arrowSize / 2}px;
+  }
+`;
 
 type ArrowIconProps = {
   ariaLabel: string;
@@ -20,83 +107,46 @@ type ArrowIconProps = {
 export function ArrowIconButton({ ariaLabel, type, className, onClick }: ArrowIconProps) {
   return (
     <Button className={className} onClick={onClick} type="button" aria-label={ariaLabel}>
-      <Icon as={type} w={{ base: '8', sm: '12' }} h={{ base: '8', sm: '12' }} color="white" />
+      {type === IoChevronBack ? <IconPrev /> : <IconNext />}
     </Button>
   );
 }
 
-export default function Partner({ ...all }: ChakraProps) {
-  const slickSettings: Settings = {
-    infinite: true,
-    centerPadding: '60px',
-    slidesToShow: 3,
-    speed: 500,
-    rows: 2,
-    slidesPerRow: 1,
-    slidesToScroll: 3,
-    autoplay: true,
-    autoplaySpeed: 6000,
-    prevArrow: <ArrowIconButton ariaLabel="Display left item" type={IoChevronBack} />,
-    nextArrow: <ArrowIconButton ariaLabel="Display right item" type={IoChevronForward} />,
-  };
+const slickSettings: Settings = {
+  infinite: true,
+  centerPadding: '60px',
+  slidesToShow: 3,
+  speed: 500,
+  rows: 2,
+  slidesPerRow: 1,
+  slidesToScroll: 3,
+  autoplay: true,
+  autoplaySpeed: 6000,
+  prevArrow: <ArrowIconButton ariaLabel="Display left item" type={IoChevronBack} />,
+  nextArrow: <ArrowIconButton ariaLabel="Display right item" type={IoChevronForward} />,
+};
 
+type Props = {
+  mt?: string | { [key in Breakpoint]?: string };
+};
+
+export default function Partner({ mt }: Props) {
   return (
-    <SideContainer
-      {...all}
-      side="left"
-      _after={{
-        position: 'absolute',
-        right: '-80px',
-        bottom: '-50px',
-        zIndex: -1,
-        width: '300px',
-        height: `${300 * 2.7375}px`,
-        background: 'url("/images/silhouettes/dancing/lifting-figure.svg") no-repeat',
-        transform: 'scaleX(-1)',
-        opacity: 0.05,
-        content: '""',
-      }}
-    >
-      <Box as="article" px={{ md: '24' }} py="12">
-        <SectionHeader as="h2" mb="12" ml="36" fontSize="2xl">
-          Gönner &mdash; ohne euch geht nichts … Danke!
-        </SectionHeader>
+    <SideContainerStyled mt={mt} side="left">
+      <Article>
+        <SectionHeaderStyled>Gönner &mdash; ohne euch geht nichts … Danke!</SectionHeaderStyled>
 
-        <Box pos="relative" mr="-28" px="32" cursor="grab" css={SlickSliderStyles}>
+        <SliderContainer>
           <Slider {...slickSettings}>
             {shuffle(partnerList).map((partner) => (
-              <Box key={partner.id} p="0.5rem 0.75rem">
+              <ImageContainer key={partner.id}>
+                {/* // TODO: Use NextJS for the generation of the images */}
                 <img src={partner.image} alt={partner.name} />
-              </Box>
+              </ImageContainer>
             ))}
           </Slider>
-        </Box>
-      </Box>
-    </SideContainer>
+        </SliderContainer>
+      </Article>
+    </SideContainerStyled>
   );
 }
-
-const Button = styled.button`
-  position: absolute;
-  top: calc(50% - ${theme.sizes.news.slider.arrowSize} / 2);
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: ${theme.sizes.news.slider.arrowSize};
-  height: ${theme.sizes.news.slider.arrowSize};
-  background-color: ${theme.colors.brand.base};
-  border-radius: 100%;
-
-  &:hover {
-    opacity: 0.9;
-  }
-
-  &.slick-prev {
-    left: -${+theme.sizes.news.slider.arrowSize.slice(0, -2) / 2}px;
-  }
-
-  &.slick-next {
-    right: -${+theme.sizes.news.slider.arrowSize.slice(0, -2) / 2}px;
-  }
-`;

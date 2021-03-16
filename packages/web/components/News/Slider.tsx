@@ -53,20 +53,20 @@ export function ArrowIconButton({ ariaLabel, type, className, onClick }: ArrowIc
   );
 }
 
+const slickSettings: Settings = {
+  dots: true,
+  autoplay: true,
+  autoplaySpeed: 6000,
+  lazyLoad: 'progressive',
+  prevArrow: <ArrowIconButton type={IoChevronBack} ariaLabel="Display left slide" />,
+  nextArrow: <ArrowIconButton type={IoChevronForward} ariaLabel="Display right slide" />,
+  // eslint-disable-next-line react/display-name
+  customPaging: () => <button type="button" aria-label="Slider navigation dot" />,
+};
+
 type Props = { articleList: Article[] } & SectionProps;
 
 export default function NewsSlider({ articleList, mt }: Props) {
-  const slickSettings: Settings = {
-    dots: true,
-    autoplay: true,
-    autoplaySpeed: 6000,
-    lazyLoad: 'progressive',
-    prevArrow: <ArrowIconButton type={IoChevronBack} ariaLabel="Display left slide" />,
-    nextArrow: <ArrowIconButton type={IoChevronForward} ariaLabel="Display right slide" />,
-    // eslint-disable-next-line react/display-name
-    customPaging: () => <button type="button" aria-label="Slider navigation dot" />,
-  };
-
   return (
     <Section className="news-slider" mt={mt}>
       <Slider {...slickSettings}>

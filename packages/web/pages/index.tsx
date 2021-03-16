@@ -24,7 +24,7 @@ const P = styled.p`
 `;
 
 export default function Index() {
-  // const { isMobile } = useMediaQuery(breakpoints.lg);
+  const isMobile = useMediaQuery('lg');
 
   return (
     <Layout title="Home &mdash; HSV Neuwied">
@@ -50,9 +50,7 @@ export default function Index() {
 
       <Contact mt={{ base: '4rem', md: '8rem', xl: '12rem' }} />
 
-      {/* 
       {!isMobile && <Partner mt={{ md: '8rem', xl: '12rem' }} />}
-      */}
     </Layout>
   );
 }

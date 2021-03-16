@@ -14,12 +14,24 @@ import { mediaQuery } from '../styles';
 const P = styled.p`
   font-size: ${({ theme }) => theme.sizes.font.xl};
 
-  & + p {
+  ~ p {
     margin-top: 0.75rem;
   }
 
   ${mediaQuery('xl')} {
     font-size: ${({ theme }) => theme.sizes.font.xl};
+  }
+`;
+
+const MatchesStyled = styled(Matches)`
+  margin-top: 4rem;
+
+  ${mediaQuery('md')} {
+    margin-top: 8rem;
+  }
+
+  ${mediaQuery('xl')} {
+    margin-top: 12rem;
   }
 `;
 
@@ -41,13 +53,15 @@ export default function Index() {
         </Button>
       </PageHeader>
 
-      {/* <Matches mt={{ base: '16', md: '32', xl: '48' }} />
+      <MatchesStyled />
 
+      {/* 
       <NewsSlider articleList={articleList.slice(0, 5)} mt={{ base: '16', md: '32', xl: '48' }} />
 
       <Contact mt={{ base: '16', md: '32', xl: '48' }} />
 
-      {!isMobile && <Partner mt={{ md: '32', xl: '48' }} />} */}
+    {!isMobile && <Partner mt={{ md: '32', xl: '48' }} />}
+    */}
     </Layout>
   );
 }

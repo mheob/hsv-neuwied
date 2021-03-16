@@ -1,0 +1,31 @@
+[
+  {
+    "id": "1",
+    "league": "Kreisliga A",
+    "day": "12. Spieltag",
+    "dateTime": "Fri Jul 26 2021 14:30:00 GMT+0200",
+    "home": {
+      "logo": "/images/logos/hsv-neuwied.webp",
+      "name": "HSV Neuwied"
+    },
+    "away": {
+      "logo": "/images/logos/steinefrenz.webp",
+      "name": "Spvgg. Steinefrenz"
+    },
+    "result": "3:1"
+  },
+  {
+    "id": "2",
+    "league": "Kreisliga A",
+    "day": "13. Spieltag",
+    "dateTime": "Fri Sep 6 2021 16:00:00 GMT+0200",
+    "home": {
+      "logo": "/images/logos/neustadt.webp",
+      "name": "DJK Neustadt-Fernthal"
+    },
+    "away": {
+      "logo": "/images/logos/hsv-neuwied.webp",
+      "name": "HSV Neuwied"
+    }
+  }
+]

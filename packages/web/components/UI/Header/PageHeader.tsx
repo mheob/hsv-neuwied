@@ -58,7 +58,7 @@ const ContainerStyled = styled(Container)`
   height: 100%;
 `;
 
-const Header = styled.h1`
+const Heading = styled.h1`
   margin-top: 2rem;
   color: ${({ theme }) => theme.colors.brand.dark};
   font-size: ${({ theme }) => theme.sizes.font['2xl']};
@@ -103,6 +103,7 @@ const Article = styled.article`
     width: 67%;
   }
 `;
+
 const SectionHeaderStyled = styled(SectionHeader)`
   font-size: ${({ theme }) => theme.sizes.font['3xl']};
 
@@ -134,10 +135,10 @@ export default function PageHeader({ bgImage, children, title, subtitle }: Props
 
         <ContainerStyled>
           {isMobile ? (
-            <Header>
+            <Heading>
               {title}
               {subtitle && <Subtitle>{subtitle}</Subtitle>}
-            </Header>
+            </Heading>
           ) : (
             <Article>
               <SectionHeaderStyled as="h1">

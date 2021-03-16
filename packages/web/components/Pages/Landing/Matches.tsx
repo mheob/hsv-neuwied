@@ -1,55 +1,99 @@
-import { Box, ContainerProps, Flex, HStack, SimpleGrid } from '@chakra-ui/react';
+import styled from 'styled-components';
 
+import { mediaQuery } from '../../../styles';
 import Button from '../../Forms/Button';
 import Container from '../../UI/Container';
 import SectionHeader from '../../UI/Header/SectionHeader';
 import Match from './Match';
 
-export default function Matches({ ...all }: ContainerProps) {
+const Section = styled.section`
+  position: relative;
+
+  &::after {
+    position: absolute;
+    bottom: -150px;
+    left: -150px;
+    z-index: -1;
+    width: 250px;
+    height: ${250 * 2.0615}px;
+    background: url('/images/silhouettes/soccer/standing-child.svg') no-repeat;
+    opacity: 0.05;
+    content: '';
+  }
+`;
+
+const ContainerStyled = styled(Container)`
+  ${mediaQuery('xl')} {
+    margin-right: -5%;
+    margin-left: 5%;
+  }
+`;
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ${mediaQuery('md')} {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+`;
+
+const SectionHeaderStyled = styled(SectionHeader)`
+  font-size: ${({ theme }) => theme.sizes.font.xl};
+
+  ${mediaQuery('xl')} {
+    font-size: ${({ theme }) => theme.sizes.font['2xl']};
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  align-self: flex-end;
+  margin-top: -1.5rem;
+  margin-bottom: 1.5rem;
+
+  ${mediaQuery('md')} {
+    align-self: unset;
+    margin-top: unset;
+    margin-bottom: unset;
+  }
+
+  > * ~ * {
+    margin-left: 1rem;
+  }
+`;
+
+const MatchesGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+
+  ${mediaQuery('xl')} {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+  }
+`;
+
+export default function Matches() {
   return (
-    <Container
-      {...all}
-      as="section"
-      pos="relative"
-      _after={{
-        position: 'absolute',
-        bottom: '-150px',
-        left: '-150px',
-        zIndex: -1,
-        width: '250px',
-        height: `${250 * 2.0615}px`,
-        background: 'url("/images/silhouettes/soccer/standing-child.svg") no-repeat',
-        opacity: 0.05,
-        content: '""',
-      }}
-    >
-      <Box ml={{ xl: '5%' }} mr={{ xl: '-5%' }}>
-        <Flex
-          as="header"
-          direction={{ base: 'column', md: 'row' }}
-          justifyContent="space-between"
-          alignItems={{ md: 'flex-start' }}
-        >
-          <SectionHeader fontSize={{ base: 'xl', md: '2xl' }}>
-            Aktuelle Spiele vom HSV
-          </SectionHeader>
+    <Section>
+      <ContainerStyled>
+        <Header>
+          <SectionHeaderStyled>Aktuelle Spiele vom HSV</SectionHeaderStyled>
 
-          <HStack
-            spacing="4"
-            alignSelf={{ base: 'flex-end', md: 'unset' }}
-            mt={{ base: '-6', md: 'unset' }}
-            mb={{ base: '6', md: 'unset' }}
-          >
-            <Button size="sm">Alle Spiele</Button>
-            <Button size="sm">Tabelle</Button>
-          </HStack>
-        </Flex>
+          <ButtonGroup>
+            <Button size="small">Alle Spiele</Button>
+            <Button size="small">Tabelle</Button>
+          </ButtonGroup>
+        </Header>
 
-        <SimpleGrid columns={{ base: 1, xl: 2 }} spacing={{ base: '10', xl: '20' }}>
+        <MatchesGrid>
           <Match />
           <Match isNextMatch />
-        </SimpleGrid>
-      </Box>
-    </Container>
+        </MatchesGrid>
+      </ContainerStyled>
+    </Section>
   );
 }

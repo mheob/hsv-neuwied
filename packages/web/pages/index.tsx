@@ -48,9 +48,9 @@ export default function Index() {
         mt={{ base: '4rem', md: '8rem', xl: '12rem' }}
       />
 
-      {/* 
       <Contact mt={{ base: '4rem', md: '8rem', xl: '12rem' }} />
 
+      {/* 
       {!isMobile && <Partner mt={{ md: '8rem', xl: '12rem' }} />}
       */}
     </Layout>

@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { Breakpoint, mediaQuery } from './breakpoints';
+import { Breakpoint, mediaQuery } from '../breakpoints';
 
 export function getTopSpacing(mt: string | { [key in Breakpoint]?: string }) {
   if (typeof mt === 'string') {

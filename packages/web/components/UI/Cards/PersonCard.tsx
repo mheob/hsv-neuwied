@@ -19,18 +19,20 @@ const Card = styled.div<CardProps>`
 `;
 
 const ContactSection = styled.div`
+  display: flex;
   background-color: ${({ theme }) => theme.colors.brand.base};
   transition: 300ms ease height;
 
   ${mediaQuery('lg')} {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 6px; /* TODO: Check if this could set better */
     left: 0;
     height: 0;
+    border-top: 1px solid ${({ theme }) => theme.colors.brand.light};
   }
 
-  & > * ~ * {
+  > * ~ * {
     border-left: 1px solid ${({ theme }) => theme.colors.brand.light};
   }
 
@@ -42,16 +44,18 @@ const ContactSection = styled.div`
 const ContactLinkStyled = styled(ContactLink)`
   display: flex;
   flex: 1;
+  align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.colors.gray.light};
 
   &:hover {
-    ${({ theme }) => theme.colors.brand.light}
+    color: ${({ theme }) => theme.colors.brand.light};
   }
 `;
 
 const iconStyles = css`
   width: 2.5rem;
+  height: 0;
   transition: 300ms ease height;
 
   [role='group']:hover & {

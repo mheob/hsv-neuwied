@@ -6,10 +6,9 @@ export default css`
     font-family: 'Baveuse';
     font-style: normal;
     font-display: fallback;
-    src: url(../public/fonts/Baveuse.ttf.woff) format('woff'),
-      url(../public/fonts/Baveuse.ttf.svg#Baveuse) format('svg'),
-      url(../public/fonts/Baveuse.ttf.eot),
-      url(../public/fonts/Baveuse.ttf.eot?#iefix) format('embedded-opentype');
+    src: url(../fonts/Baveuse.ttf.woff) format('woff'),
+      url(../fonts/Baveuse.ttf.svg#Baveuse) format('svg'), url(../fonts/Baveuse.ttf.eot),
+      url(../fonts/Baveuse.ttf.eot?#iefix) format('embedded-opentype');
   }
 
   /* Copied from https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,700;1,200;1, 400;1,700&display=swap */

@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 
 import partnerList from '../../../data/partner.json';
 import { Breakpoint, mediaQuery } from '../../../styles';
-import SlickSliderStyles from '../../../styles/external/SlickSlider';
+import { slickSliderStyles } from '../../../styles/components';
 import { shuffle } from '../../../utils/array';
 import SideContainer from '../../UI/Container/SideContainer';
 import SectionHeader from '../../UI/Header/SectionHeader';
@@ -24,12 +24,10 @@ const iconStyles = css`
 
 const IconPrev = styled(IoChevronBack)`
   ${iconStyles}
-  margin-left: 2.5rem;
 `;
 
 const IconNext = styled(IoChevronForward)`
   ${iconStyles}
-  margin-right: 2.5rem;
 `;
 
 const SideContainerStyled = styled(SideContainer)`
@@ -62,10 +60,10 @@ const SectionHeaderStyled = styled(SectionHeader)`
 `;
 
 const SliderContainer = styled.div`
-  ${SlickSliderStyles}
+  ${slickSliderStyles}
 
   position: relative;
-  margin-right: -7rem;
+  margin-right: -8rem;
   padding: 0 8rem;
   cursor: grab;
 `;
@@ -76,13 +74,13 @@ const ImageContainer = styled.div`
 
 const Button = styled.button`
   position: absolute;
-  top: calc(50% - ${({ theme }) => theme.sizes.news.slider.arrowSize} / 2);
+  top: calc(50% - ${({ theme }) => theme.sizes.news.slider.arrowSize}px / 2);
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ theme }) => theme.sizes.news.slider.arrowSize};
-  height: ${({ theme }) => theme.sizes.news.slider.arrowSize};
+  width: ${({ theme }) => theme.sizes.news.slider.arrowSize}px;
+  height: ${({ theme }) => theme.sizes.news.slider.arrowSize}px;
   background-color: ${({ theme }) => theme.colors.brand.base};
   border-radius: 100%;
 

@@ -1,10 +1,10 @@
 import { css } from 'styled-components';
 
 import { getRgbaStringFromHex } from '../../utils/stylings';
-import { mediaQuery } from '../';
 import { theme } from '../theme';
+import { mediaQuery } from '..';
 
-export default css`
+export const slickSliderStyles = css`
   .slick-slide {
     display: none;
     float: left;
@@ -134,6 +134,7 @@ export default css`
     button {
       width: 100%;
       height: 100%;
+      background-color: transparent;
     }
   }
 

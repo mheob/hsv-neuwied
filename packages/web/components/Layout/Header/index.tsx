@@ -24,7 +24,7 @@ const OuterBox = styled.div<{ isPinned?: boolean }>`
   position: relative;
   width: 100%;
   height: ${({ isPinned, theme }) =>
-    isPinned ? theme.sizes.header.heightPinned : theme.sizes.header.height};
+    isPinned ? theme.sizes.header.heightPinned : theme.sizes.header.height}px;
   background-color: ${({ theme }) => theme.colors.brand.dark};
   transition: all 200ms linear;
 
@@ -38,11 +38,13 @@ const OuterBox = styled.div<{ isPinned?: boolean }>`
 `;
 
 const InnerBox = styled(Container)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: ${({ theme }) => theme.sizes.header.heightPinned};
-  transition: all 200ms linear;
+  && {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: ${({ theme }) => theme.sizes.header.heightPinned}px;
+    transition: all 200ms linear;
+  }
 `;
 
 export default function Header() {

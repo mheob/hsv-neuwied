@@ -6,6 +6,7 @@ import PersonCard from '../../UI/Cards/PersonCard';
 const Card = styled.div``;
 
 const Heading = styled.h3`
+  font-weight: normal;
   font-size: ${({ theme }) => theme.sizes.font.lg};
   font-style: italic;
 `;

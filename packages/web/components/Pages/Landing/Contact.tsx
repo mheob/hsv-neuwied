@@ -18,11 +18,11 @@ const SectionContainer = styled.div`
 
   ${mediaQuery('xl')} {
     flex-direction: row;
-    padding: 3rem 6rem;
+    padding: 3rem;
   }
 
   > * ~ * {
-    margin-left: 2rem;
+    margin-left: 4rem;
   }
 `;
 
@@ -56,6 +56,11 @@ const SocialLink = styled.a`
 
 const Cards = styled.article`
   width: 100%;
+  margin-top: 4rem;
+
+  ${mediaQuery('xl')} {
+    margin-top: unset;
+  }
 `;
 
 const CardGrid = styled.div`

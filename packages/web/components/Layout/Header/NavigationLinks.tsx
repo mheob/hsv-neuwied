@@ -8,7 +8,9 @@ import { mediaQuery } from '../../../styles';
 const Navigation = styled.nav<{ isOpen?: boolean }>`
   position: absolute;
   bottom: ${({ isOpen, theme }) =>
-    isOpen ? `calc(-100vh + ${theme.sizes.header.heightPinned})` : theme.sizes.header.heightPinned};
+    isOpen
+      ? `calc(-100vh + ${theme.sizes.header.heightPinned}px)`
+      : `${theme.sizes.header.heightPinned}px`};
   z-index: 101;
   display: flex;
   flex-direction: column;

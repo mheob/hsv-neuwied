@@ -16,13 +16,19 @@ export default css`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  a {
-    text-decoration: none;
-  }
-
   a,
   button {
+    cursor: pointer;
     transition: 200ms;
+  }
+
+  a {
+    color: ${theme.colors.brand.base};
+    text-decoration: none;
+
+    &:hover {
+      color: ${theme.colors.brand.dark};
+    }
   }
 
   /* Accessibility */

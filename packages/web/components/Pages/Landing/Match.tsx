@@ -18,6 +18,7 @@ const Article = styled.article`
 
 const Heading = styled.h1`
   color: ${({ theme }) => theme.colors.brand.base};
+  font-weight: normal;
   font-size: ${({ theme }) => theme.sizes.font['2xl']};
   text-align: center;
 `;
@@ -59,9 +60,9 @@ const TeamName = styled.div`
 const MatchInformation = styled.div`
   display: flex;
   flex-direction: column;
+  grid-column: 2 / 4;
   justify-content: space-around;
   text-align: center;
-  column-span: 2;
 `;
 
 const Meta = styled.div`

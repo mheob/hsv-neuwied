@@ -6,6 +6,7 @@ export default css`
   *::before,
   *::after {
     box-sizing: border-box;
+    border: none;
   }
 
   /* Remove default margin */
@@ -43,6 +44,11 @@ export default css`
   /* A elements that don't have a class get default styles */
   a:not([class]) {
     text-decoration-skip-ink: auto;
+  }
+
+  address,
+  i {
+    font-style: normal;
   }
 
   /* Make images easier to work with */

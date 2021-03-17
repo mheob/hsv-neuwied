@@ -37,8 +37,11 @@ const Container = styled.div`
   }
 `;
 
-type Props = { children: ReactNode };
+type Props = {
+  children: ReactNode;
+  className?: string;
+};
 
-export default function index({ children }: Props) {
-  return <Container>{children}</Container>;
+export default function index({ children, className }: Props) {
+  return <Container className={className}>{children}</Container>;
 }

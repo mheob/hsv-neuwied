@@ -19,7 +19,7 @@ const P = styled.p`
   }
 
   ${mediaQuery('xl')} {
-    font-size: ${({ theme }) => theme.sizes.font.xl};
+    font-size: ${({ theme }) => theme.sizes.font['2xl']};
   }
 `;
 
@@ -36,7 +36,7 @@ export default function Index() {
         <P>Du willst mehr über das Angebot und die Aktivitäten vom HSV&nbsp;Neuwied wissen?</P>
         <P>Dann bleib auf dem Laufenden! In und für Neuwied.</P>
 
-        <Button size="large" mt="1rem">
+        <Button fontSize="1.5rem" mt="2rem" size="large">
           Mehr erfahren
         </Button>
       </PageHeader>

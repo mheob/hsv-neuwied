@@ -27,7 +27,7 @@ const InnerStyled = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    margin-top: ${({ theme }) => `calc(-${theme.sizes.header.height} + 2.5vw)`};
+    margin-top: ${({ theme }) => `calc(-${theme.sizes.header.height}px + 2.5vw)`};
   }
 `;
 
@@ -95,7 +95,7 @@ const Article = styled.article`
   left: 0;
   z-index: 2;
   margin: 1rem;
-  padding: 2.5rem 5rem;
+  padding: 3rem 7rem;
   background-color: white;
   box-shadow: ${({ theme }) => theme.shadows.md};
 
@@ -105,10 +105,12 @@ const Article = styled.article`
 `;
 
 const SectionHeaderStyled = styled(SectionHeader)`
-  font-size: ${({ theme }) => theme.sizes.font['3xl']};
+  && {
+    font-size: ${({ theme }) => theme.sizes.font['3xl']};
 
-  ${mediaQuery('xl')} {
-    font-size: ${({ theme }) => theme.sizes.font['4xl']};
+    ${mediaQuery('xl')} {
+      font-size: ${({ theme }) => theme.sizes.font['4xl']};
+    }
   }
 `;
 
@@ -141,7 +143,7 @@ export default function PageHeader({ bgImage, children, title, subtitle }: Props
             </Heading>
           ) : (
             <Article>
-              <SectionHeaderStyled as="h1">
+              <SectionHeaderStyled level="h1">
                 {/* \u2014 == &mdash; */}
                 {title} {subtitle && `\u2014 ${subtitle}`}
               </SectionHeaderStyled>

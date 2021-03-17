@@ -2,13 +2,13 @@
   "Inserts data-testid attribute": {
     "scope": "javascriptreact,typescriptreact",
     "prefix": "dtid",
-    "body": ["data-testid=\"$0\""],
+    "body": ["data-testid=\"${0}\""],
     "description": "Inserts data-testid attribute"
   },
   "Inserts useEffect hook": {
     "scope": "javascriptreact,typescriptreact",
     "prefix": "ueh",
-    "body": ["useEffect(() => {$0}, []);"],
+    "body": ["useEffect(() => {${0}}, []);"],
     "description": "Inserts useEffect hook"
   },
   "Inserts useState hook": {

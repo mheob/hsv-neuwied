@@ -1,0 +1,8 @@
+{
+  "Inserts styled components theme prop": {
+    "scope": "css",
+    "prefix": "themeProp",
+    "body": ["${({ theme }) => theme.${0}};"],
+    "description": "Inserts styled components theme prop"
+  }
+}

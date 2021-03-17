@@ -1,8 +1,10 @@
-import { Field, Form, Formik, FormikProps } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
+import Link from 'next/link';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 
 import Button from '../../Forms/Button';
+import FormInput from '../../Forms/Input';
 
 const requiredMessage = 'Diese Angabe ist erforderlich!';
 
@@ -20,12 +22,20 @@ const ValidationSchema = Yup.object().shape({
   privacy: Yup.boolean().required(requiredMessage).oneOf([true], requiredMessage),
 });
 
-const ErrorMessage = styled.div`
-  color: ${({ theme }) => theme.colors.error};
+const Input = styled(FormInput)`
+  margin-top: 1.25rem;
+  font-size: ${({ theme }) => theme.sizes.font.xl};
+`;
+
+const Checkbox = styled(FormInput)`
+  margin-top: 1.25rem;
+  font-size: ${({ theme }) => theme.sizes.font.lg};
 `;
 
 const ButtonStyled = styled(Button)`
   width: 100%;
+  margin-top: 2rem;
+  font-size: ${({ theme }) => theme.sizes.font.xl};
 `;
 
 type FormValues = { name: string; email: string; message: string; privacy: boolean };
@@ -43,33 +53,28 @@ export default function Simple() {
       validateOnBlur
       validationSchema={ValidationSchema}
     >
-      {({ errors, isValid, touched }: FormikProps<FormValues>) => (
+      {({ isValid, touched }: FormikProps<FormValues>) => (
         <Form>
-          <Field name="name">
-            {errors.name && touched.name ? <ErrorMessage>{errors.name}</ErrorMessage> : null}
-          </Field>
+          <Input name="name">Name</Input>
 
-          <Field name="email" type="email">
-            {errors.email && touched.email ? <ErrorMessage>{errors.email}</ErrorMessage> : null}
-          </Field>
+          <Input name="email" type="email">
+            E-Mail
+          </Input>
 
-          <Field name="message" as="textarea">
-            {errors.message && touched.message ? (
-              <ErrorMessage>{errors.message}</ErrorMessage>
-            ) : null}
-          </Field>
+          <Input name="message" type="textarea" textareaHeight="10rem">
+            Nachricht
+          </Input>
 
-          <label>
-            <Field name="privacy" type="checkbox">
-              {errors.privacy && touched.privacy ? (
-                <ErrorMessage>{errors.privacy}</ErrorMessage>
-              ) : null}
-            </Field>
-            {/* // TODO: Add the Link to the privacy page */}
-            Die Informationen zum <a>Datenschutz</a> sind mir bekannt und habe ich verstanden.
-          </label>
+          <Checkbox name="privacy" type="checkbox">
+            {/* TODO: Use a modal for the privacy instructions. */}
+            Die Informationen zum{' '}
+            <Link href="/privacy" as="/datenschutz">
+              <a>Datenschutz</a>
+            </Link>{' '}
+            sind mir bekannt und habe ich verstanden.
+          </Checkbox>
 
-          <ButtonStyled type="submit" disabled={!isValid} mt="8">
+          <ButtonStyled type="submit" disabled={!touched?.name || !isValid} size="small">
             Absenden
           </ButtonStyled>
         </Form>

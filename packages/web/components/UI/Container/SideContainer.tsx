@@ -12,9 +12,9 @@ const getMargin = (
 ) => {
   switch (side) {
     case 'left':
-      return position === 'left' ? '0' : `calc(100vw - ${breakpoints[breakpoint]}px - 2.5rem)`;
+      return position === 'left' ? '0' : `calc(100vw - ${breakpoints[breakpoint]}px)`;
     case 'right':
-      return position === 'left' ? `calc(100vw - ${breakpoints[breakpoint]}px - 2.5rem)` : '0';
+      return position === 'left' ? `calc(100vw - ${breakpoints[breakpoint]}px)` : '0';
     case 'center':
     default:
       return 'auto';

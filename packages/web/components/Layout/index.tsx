@@ -12,7 +12,7 @@ const APP_NAME = 'HSV Neuwied';
 
 const Main = styled.main`
   position: relative;
-  margin-bottom: ${({ theme }) => theme.sizes.footer.height};
+  margin-bottom: ${({ theme }) => theme.sizes.footer.height}px;
   padding-bottom: calc(102.5vw / 4.26667 + 10rem);
   overflow-x: hidden;
   background-color: ${({ theme }) => theme.colors.gray.light};
@@ -28,7 +28,7 @@ const Main = styled.main`
   }
 
   ${mediaQuery('lg')} {
-    padding-top: calc(${({ theme }) => theme.sizes.header.height} - 2.5vw);
+    padding-top: calc(${({ theme }) => theme.sizes.header.height}px - 2.5vw);
   }
 `;
 

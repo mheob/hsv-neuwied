@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import styled, { DefaultTheme, css } from 'styled-components';
 
 import { Breakpoint, getTopSpacing } from '../../styles';
+import { getRgbaStringFromHex } from '../../utils/stylings';
 
 type ColorScheme = 'base' | 'dark' | 'light';
 type Size = 'large' | 'small';
@@ -23,6 +24,7 @@ const getColor = (colorScheme: ColorScheme, theme: DefaultTheme) => {
 
 type ButtonStyledProps = {
   colorScheme: ColorScheme;
+  fontSize?: string;
   mt?: string | { [key in Breakpoint]: string };
   noTransform?: boolean;
   size?: Size;
@@ -32,6 +34,7 @@ const ButtonStyles = css<ButtonStyledProps>`
   display: inline-block;
   padding: ${({ size }) => (size ? getPaddingFromSize(size) : '0.75rem 1.5rem')};
   color: ${({ colorScheme, theme }) => getColor(colorScheme, theme).color};
+  ${({ fontSize }) => fontSize && `font-size: ${fontSize};`}
   text-align: center;
   background-color: ${({ colorScheme, theme }) => getColor(colorScheme, theme).bg};
   border-radius: 7px;
@@ -48,6 +51,14 @@ const ButtonStyles = css<ButtonStyledProps>`
   }
 
   &:disabled {
+    color: ${({ theme }) => theme.colors.gray.base};
+    background: repeating-linear-gradient(
+      -55deg,
+      ${({ theme }) => getRgbaStringFromHex(theme.colors.brand.base, 0.8)},
+      ${({ theme }) => getRgbaStringFromHex(theme.colors.brand.base, 0.8)} 10px,
+      ${({ theme }) => getRgbaStringFromHex(theme.colors.brand.base, 0.9)} 10px,
+      ${({ theme }) => getRgbaStringFromHex(theme.colors.brand.base, 0.9)} 20px
+    );
     cursor: not-allowed;
   }
 
@@ -66,8 +77,10 @@ const AnchorStyled = styled.a<ButtonStyledProps>`
 
 type Props = {
   children?: ReactNode;
+  className?: string;
   colorScheme?: ColorScheme;
   disabled?: boolean;
+  fontSize?: string;
   href?: string;
   mt?: string | { [key in Breakpoint]: string };
   noTransform?: boolean;
@@ -78,8 +91,10 @@ type Props = {
 
 export default function Button({
   children,
+  className,
   colorScheme = 'base',
   disabled = false,
+  fontSize,
   href,
   mt,
   noTransform,
@@ -91,6 +106,8 @@ export default function Button({
     return (
       <ButtonStyled
         colorScheme={colorScheme}
+        className={className}
+        fontSize={fontSize}
         mt={mt}
         noTransform={noTransform}
         size={size}
@@ -104,6 +121,8 @@ export default function Button({
     return (
       <AnchorStyled
         colorScheme={colorScheme}
+        className={className}
+        fontSize={fontSize}
         href={href}
         mt={mt}
         noTransform={noTransform}
@@ -116,7 +135,14 @@ export default function Button({
   } else {
     return (
       <Link href={href}>
-        <AnchorStyled colorScheme={colorScheme} mt={mt} noTransform={noTransform} size={size}>
+        <AnchorStyled
+          colorScheme={colorScheme}
+          className={className}
+          fontSize={fontSize}
+          mt={mt}
+          noTransform={noTransform}
+          size={size}
+        >
           {children}
         </AnchorStyled>
       </Link>

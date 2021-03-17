@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 
 import { Article } from '../../models/news';
 import { Breakpoint, getTopSpacing, mediaQuery } from '../../styles';
-import SlickSliderStyles from '../../styles/external/SlickSlider';
+import { slickSliderStyles } from '../../styles/components';
 import Slide from './Slide';
 
 const iconStyles = css`
@@ -35,7 +35,7 @@ type SectionProps = {
 };
 
 const Section = styled.section<SectionProps>`
-  ${SlickSliderStyles}
+  ${slickSliderStyles}
 
   ${({ mt }) => mt && getTopSpacing(mt)}
 `;

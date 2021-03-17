@@ -16,6 +16,10 @@ export default css`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   a,
   button {
     transition: 200ms;

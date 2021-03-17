@@ -9,7 +9,7 @@ const Container = styled.section`
   margin-top: 4rem;
 `;
 
-const Article = styled(GridItem)`
+const NewsArticle = styled(GridItem)`
   width: 33%;
 `;
 
@@ -21,8 +21,8 @@ type Props = {
 export default function ArticlePagination({ prev, next }: Props) {
   return (
     <Container>
-      {prev && <Article article={prev} />}
-      {next && <Article article={next} />}
+      {prev && <NewsArticle article={prev} />}
+      {next && <NewsArticle article={next} />}
     </Container>
   );
 }

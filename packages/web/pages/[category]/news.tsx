@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import styled, { css } from 'styled-components';
 
 import Layout from '../../components/Layout';
 import Grid from '../../components/News/Grid';
@@ -6,6 +7,118 @@ import articleCategoryList from '../../data/article-category-list.json';
 import articleList from '../../data/articles.json';
 import { Article, ArticleCategory, ArticleCategoryType } from '../../models/news';
 import { getPartOfUrl } from '../../utils/navigation/router';
+
+const NewsGrid = styled(Grid)`
+  position: relative;
+  margin-top: 12rem;
+`;
+
+const silhouetteStylesMisc = {
+  styles: `
+    &::before,
+    &::after {
+      position: absolute;
+      z-index: -1;
+      background-repeat: no-repeat;
+      opacity: 0.05;
+      content: '';
+    }
+  `,
+};
+
+const silhouetteStylesGeneral = css`
+  &::before {
+    top: -150px;
+    right: -100px;
+    width: 600px;
+    height: ${600 * 1.048}px;
+    background-image: url(/images/silhouettes/soccer/bicycle-kick.svg);
+    transform: scaleX(-1);
+  }
+
+  &::after {
+    bottom: -200px;
+    left: -120px;
+    width: 400px;
+    height: ${400 * 1.577}px;
+    background-image: url(/images/silhouettes/gymnastic/stretching.svg);
+  }
+`;
+
+const silhouetteStylesSenior = css`
+  &::before {
+    top: -100px;
+    right: -100px;
+    width: 600px;
+    height: ${600 * 1.085}px;
+    background-image: url(/images/silhouettes/soccer/goalkeeper.svg);
+    transform: scaleX(-1);
+  }
+
+  &::after {
+    bottom: -100px;
+    left: -120px;
+    width: 300px;
+    height: ${300 * 1.767}px;
+    background-image: url(/images/silhouettes/soccer/dribbling-front.svg);
+    transform: scaleX(-1);
+  }
+`;
+
+const silhouetteStylesJunior = css`
+  &::before {
+    top: -150px;
+    right: -100px;
+    width: 400px;
+    height: ${400 * 1.117}px;
+    background-image: url(/images/silhouettes/soccer/shot.svg);
+    transform: scaleX(-1);
+  }
+
+  &::after {
+    bottom: -400px;
+    left: -120px;
+    width: 400px;
+    height: ${400 * 1.053}px;
+    background-image: url(/images/silhouettes/soccer/dribbling-child.svg);
+  }
+`;
+
+const silhouetteStylesGymnastic = css`
+  &::before {
+    top: -150px;
+    right: -100px;
+    width: 350px;
+    height: ${350 * 1.6}px;
+    background-image: url(/images/silhouettes/gymnastic/mother-baby.svg);
+  }
+
+  &::after {
+    bottom: -250px;
+    left: -120px;
+    width: 450px;
+    height: ${450 * 1.093}px;
+    background-image: url(/images/silhouettes/gymnastic/family.svg);
+  }
+`;
+
+const silhouetteStylesDiamonds = css`
+  &::before {
+    top: -150px;
+    right: -100px;
+    width: 400px;
+    height: ${400 * 1.317}px;
+    background-image: url(/images/silhouettes/dancing/dancing-pair-2.svg);
+  }
+
+  &::after {
+    bottom: -250px;
+    left: -120px;
+    width: 600px;
+    height: ${600 * 0.811}px;
+    background-image: url(/images/silhouettes/dancing/dancing-team.svg);
+  }
+`;
 
 export default function NewsOfCategory() {
   const router = useRouter();
@@ -66,122 +179,13 @@ export default function NewsOfCategory() {
 
   return (
     <Layout title={getTitle()}>
-      <Grid
+      <NewsGrid
         articleList={getArticleListInCategory().sort((a, b) =>
           a.id < b.id ? -1 : a.id < b.id ? 1 : 0
         )}
         title="Aktuelles rund um den HSV"
-        mt="48"
-        pos="relative"
         css={getCategorySpecificStyles()}
       />
     </Layout>
   );
 }
-
-const silhouetteStylesMisc = {
-  styles: `
-    &::before,
-    &::after {
-      position: absolute;
-      z-index: -1;
-      background-repeat: no-repeat;
-      opacity: 0.05;
-      content: '';
-    }
-  `,
-};
-
-const silhouetteStylesGeneral = `
-  &::before {
-    top: -150px;
-    right: -100px;
-    width: 600px;
-    height: ${600 * 1.048}px;
-    background-image: url('/images/silhouettes/soccer/bicycle-kick.svg');
-    transform: scaleX(-1);
-  }
-
-  &::after {
-    bottom: -200px;
-    left: -120px;
-    width: 400px;
-    height: ${400 * 1.577}px;
-    background-image: url('/images/silhouettes/gymnastic/stretching.svg');
-  }
-`;
-
-const silhouetteStylesSenior = `
-  &::before {
-    top: -100px;
-    right: -100px;
-    width: 600px;
-    height: ${600 * 1.085}px;
-    background-image: url('/images/silhouettes/soccer/goalkeeper.svg');
-    transform: scaleX(-1);
-  }
-
-  &::after {
-    bottom: -100px;
-    left: -120px;
-    width: 300px;
-    height: ${300 * 1.767}px;
-    background-image: url('/images/silhouettes/soccer/dribbling-front.svg');
-    transform: scaleX(-1);
-  }
-`;
-
-const silhouetteStylesJunior = `
-  &::before {
-    top: -150px;
-    right: -100px;
-    width: 400px;
-    height: ${400 * 1.117}px;
-    background-image: url('/images/silhouettes/soccer/shot.svg');
-    transform: scaleX(-1);
-  }
-
-  &::after {
-    bottom: -400px;
-    left: -120px;
-    width: 400px;
-    height: ${400 * 1.053}px;
-    background-image: url('/images/silhouettes/soccer/dribbling-child.svg');
-  }
-`;
-
-const silhouetteStylesGymnastic = `
-  &::before {
-    top: -150px;
-    right: -100px;
-    width: 350px;
-    height: ${350 * 1.6}px;
-    background-image: url('/images/silhouettes/gymnastic/mother-baby.svg');
-  }
-
-  &::after {
-    bottom: -250px;
-    left: -120px;
-    width: 450px;
-    height: ${450 * 1.093}px;
-    background-image: url('/images/silhouettes/gymnastic/family.svg');
-  }
-`;
-
-const silhouetteStylesDiamonds = `
-  &::before {
-    top: -150px;
-    right: -100px;
-    width: 400px;
-    height: ${400 * 1.317}px;
-    background-image: url('/images/silhouettes/dancing/dancing-pair-2.svg');
-  }
-
-  &::after {
-    bottom: -250px;
-    left: -120px;
-    width: 600px;
-    height: ${600 * 0.811}px;
-    background-image: url('/images/silhouettes/dancing/dancing-team.svg');
-  }
-`;

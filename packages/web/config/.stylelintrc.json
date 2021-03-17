@@ -1,4 +1,6 @@
 {
-  "processors": ["stylelint-processor-styled-components"],
-  "extends": ["../../../config/.stylelintrc.json", "stylelint-config-styled-components"]
+  "extends": ["../../../config/.stylelintrc.json", "stylelint-config-styled-components"],
+  "rules": {
+    "font-family-no-missing-generic-family-keyword": null
+  }
 }

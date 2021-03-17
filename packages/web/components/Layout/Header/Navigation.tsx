@@ -1,45 +1,66 @@
-import {
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  Flex,
-  Icon,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
+import styled from 'styled-components';
 
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import breakpoints from '../../../theme/foundations/breakpoints';
+import { mediaQuery } from '../../../styles';
+import { toggleScrollingState } from '../../../utils/navigation/scroll';
 import NavigationLinks from './NavigationLinks';
 
-export default function Navigation() {
-  const { isMobile } = useMediaQuery(breakpoints.lg);
+const Container = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  ${mediaQuery('lg')} {
+    align-items: flex-end;
+  }
+`;
+
+const ClosingOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 102;
+`;
+
+const Button = styled.button`
+  z-index: 103;
+  padding: 0;
+`;
+
+export default function Navigation() {
+  const isMobile = useMediaQuery('lg');
+
+  const [drawerIsOpenState, setDrawerIsOpenState] = useState(false);
+
+  const toggleDrawer = () => {
+    setDrawerIsOpenState(!drawerIsOpenState);
+    toggleScrollingState(!drawerIsOpenState);
+  };
+
+  const closeDrawer = () => {
+    setDrawerIsOpenState(false);
+    toggleScrollingState(false);
+  };
 
   return (
-    <Flex justifyContent="flex-end" w="full" alignItems={{ lg: 'flex-end' }}>
+    <Container>
       {isMobile ? (
         <>
-          <Button colorScheme="" onClick={onOpen} px="0" type="button" aria-label="open menu">
-            <Icon as={IoMenu} w="12" h="12" />
+          {drawerIsOpenState && <ClosingOverlay onClick={closeDrawer}></ClosingOverlay>}
+
+          <Button onClick={toggleDrawer} type="button" aria-label="open menu">
+            <IoMenu size="3rem" />
           </Button>
 
-          <Drawer isOpen={isOpen} onClose={onClose} isFullHeight placement="top">
-            <DrawerCloseButton color="white" size="lg" mr="3" mt="6" zIndex="skipLink" />
-
-            <DrawerContent bgColor="brand.dark">
-              <DrawerBody p="0">
-                <NavigationLinks />
-              </DrawerBody>
-            </DrawerContent>
-          </Drawer>
+          <NavigationLinks isOpen={drawerIsOpenState} />
         </>
       ) : (
         <NavigationLinks />
       )}
-    </Flex>
+    </Container>
   );
 }

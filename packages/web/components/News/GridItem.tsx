@@ -1,75 +1,33 @@
-import { Box, Heading, Link, Stack, StackProps, Text, VStack } from '@chakra-ui/react';
-import styled from '@emotion/styled';
-import NextImage from 'next/image';
+import NextImage, { ImageProps } from 'next/image';
 import NextLink from 'next/link';
+import styled from 'styled-components';
 
 import { Article } from '../../models/news';
+import { mediaQuery } from '../../styles';
 import { formatDateToLocaleLong } from '../../utils/date-time';
 import Button from '../Forms/Button';
 import Meta from './Meta';
 
-type Props = { article: Article } & StackProps;
+const ArticleStyled = styled.article`
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background-color: white;
+  box-shadow: ${({ theme }) => theme.shadows.md};
 
-export default function GridItem({ article, ...all }: Props) {
-  const categories = Array.isArray(article.category) ? article.category : [article.category];
-  const hrefToArticle = `/${categories[0].slug}/${article.slug}`;
+  > * ~ * {
+    margin-top: 1rem;
+  }
+`;
 
-  return (
-    <VStack
-      spacing="4"
-      justifyContent="space-between"
-      p="6"
-      bgColor="white"
-      boxShadow="md"
-      {...all}
-    >
-      <Box as="header">
-        <NextLink href={hrefToArticle} passHref>
-          <Link d="block" overflow="hidden">
-            <Image
-              src={article.featuredImage.src}
-              alt={article.featuredImage.alt}
-              width={450}
-              height={320}
-              layout="responsive"
-            />
-          </Link>
-        </NextLink>
+const Header = styled.header``;
 
-        <Heading as="h1" mt="12" fontSize="2xl">
-          <NextLink href={hrefToArticle} passHref>
-            <Link color="brand.base" _hover={{ color: 'brand.dark' }}>
-              {article.title}
-            </Link>
-          </NextLink>
-        </Heading>
-      </Box>
+const ImageLink = styled.a`
+  display: block;
+  overflow: hidden;
+`;
 
-      <Text fontSize="lg">{article.teaser}</Text>
-
-      <Stack
-        as="footer"
-        direction={{ base: 'column', md: 'row' }}
-        alignContent="flex-end"
-        justifyContent="space-between"
-        w="full"
-      >
-        <Meta
-          creationDate={formatDateToLocaleLong(new Date(article.createdAt))}
-          categories={categories}
-        />
-
-        <NextLink href={hrefToArticle} passHref>
-          <Button as="a" colorScheme="dark" alignSelf="flex-end" ml="4" whiteSpace="nowrap">
-            alles erfahren
-          </Button>
-        </NextLink>
-      </Stack>
-    </VStack>
-  );
-}
-
-const Image = styled(NextImage)`
+const Image = styled(NextImage)<ImageProps>`
   width: 100%;
   height: 20rem;
   object-fit: cover;
@@ -80,3 +38,82 @@ const Image = styled(NextImage)`
     opacity: 0.8;
   }
 `;
+
+const Title = styled.h1`
+  margin-top: 3rem;
+  font-size: ${({ theme }) => theme.sizes.font['2xl']};
+`;
+
+const TitleLink = styled.a`
+  color: ${({ theme }) => theme.colors.brand.base};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.brand.dark};
+  }
+`;
+
+const Teaser = styled.p`
+  font-size: ${({ theme }) => theme.sizes.font.lg};
+`;
+
+const Footer = styled.footer`
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  justify-content: space-between;
+  width: 100%;
+
+  ${mediaQuery('md')} {
+    flex-direction: row;
+  }
+`;
+
+const ButtonStyled = styled(Button)`
+  align-self: flex-end;
+  margin-left: 1rem;
+  white-space: nowrap;
+`;
+
+type Props = { article: Article };
+
+export default function GridItem({ article }: Props) {
+  const categories = Array.isArray(article.category) ? article.category : [article.category];
+  const hrefToArticle = `/${categories[0].slug}/${article.slug}`;
+
+  return (
+    <ArticleStyled>
+      <Header>
+        <NextLink href={hrefToArticle} passHref>
+          <ImageLink>
+            <Image
+              src={article.featuredImage.src}
+              alt={article.featuredImage.alt}
+              width={450}
+              height={320}
+              layout="responsive"
+            />
+          </ImageLink>
+        </NextLink>
+
+        <Title>
+          <NextLink href={hrefToArticle}>
+            <TitleLink>{article.title}</TitleLink>
+          </NextLink>
+        </Title>
+      </Header>
+
+      <Teaser>{article.teaser}</Teaser>
+
+      <Footer>
+        <Meta
+          creationDate={formatDateToLocaleLong(new Date(article.createdAt))}
+          categories={categories}
+        />
+
+        <ButtonStyled href={hrefToArticle} colorScheme="dark">
+          alles erfahren
+        </ButtonStyled>
+      </Footer>
+    </ArticleStyled>
+  );
+}

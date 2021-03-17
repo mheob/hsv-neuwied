@@ -1,19 +1,22 @@
-import { Box, ChakraProps, Heading } from '@chakra-ui/react';
+import styled from 'styled-components';
 
 import { PersonCard as PersonCardType } from '../../../models/person';
 import PersonCard from '../../UI/Cards/PersonCard';
 
-type Props = { person: PersonCardType } & ChakraProps;
+const Card = styled.div``;
 
-export default function ContactCard({ person, ...all }: Props) {
+const Heading = styled.h3`
+  font-size: ${({ theme }) => theme.sizes.font.lg};
+  font-style: italic;
+`;
+
+type Props = { person: PersonCardType };
+
+export default function ContactCard({ person }: Props) {
   return (
-    <Box {...all}>
-      {person.title && (
-        <Heading as="h3" fontSize="lg" fontStyle="italic">
-          {person.title}
-        </Heading>
-      )}
-      <PersonCard person={person} mt="6" />
-    </Box>
+    <Card>
+      {person.title && <Heading>{person.title}</Heading>}
+      <PersonCard person={person} mt="1.5rem" />
+    </Card>
   );
 }

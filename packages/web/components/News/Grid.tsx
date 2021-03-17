@@ -1,27 +1,49 @@
-import { ChakraProps, SimpleGrid } from '@chakra-ui/react';
+import styled from 'styled-components';
 
 import { Article } from '../../models/news';
+import { mediaQuery } from '../../styles';
 import Container from '../UI/Container';
 import SectionHeader from '../UI/Header/SectionHeader';
 import GridItem from './GridItem';
 
+const SectionHeaderStyled = styled(SectionHeader)`
+  font-size: ${({ theme }) => theme.sizes.font['2xl']};
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-top: 8rem;
+
+  ${mediaQuery('lg')} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  ${mediaQuery('2xl')} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  ${mediaQuery('3xl')} {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
 type Props = {
   articleList: Article[];
   title: string;
-} & ChakraProps;
+};
 
-export default function Grid({ articleList, title, ...all }: Props) {
+export default function NewsGrid({ articleList, title }: Props) {
   return (
-    <Container {...all}>
-      <SectionHeader as="h2" fontSize="2xl">
-        {title}
-      </SectionHeader>
+    <Container>
+      <SectionHeaderStyled>{title}</SectionHeaderStyled>
 
-      <SimpleGrid columns={{ base: 1, lg: 2, '2xl': 3, '3xl': 4 }} spacing="10" mt="32">
+      <Grid>
         {articleList.map((article) => (
           <GridItem key={article.id} article={article} />
         ))}
-      </SimpleGrid>
+      </Grid>
     </Container>
   );
 }

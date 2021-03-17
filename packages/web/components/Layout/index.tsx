@@ -1,14 +1,36 @@
-import { Box } from '@chakra-ui/layout';
 import Head from 'next/head';
 import { ReactNode, useEffect } from 'react';
+import styled from 'styled-components';
 
 import pkg from '../../package.json';
-import theme from '../../theme';
+import { mediaQuery } from '../../styles';
 import { initFocusRingOnlyOnTab } from '../../utils/accessibility';
 import Footer from './Footer';
 import Header from './Header';
 
 const APP_NAME = 'HSV Neuwied';
+
+const Main = styled.main`
+  position: relative;
+  margin-bottom: ${({ theme }) => theme.sizes.footer.height};
+  padding-bottom: calc(102.5vw / 4.26667 + 10rem);
+  overflow-x: hidden;
+  background-color: ${({ theme }) => theme.colors.gray.light};
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw));
+
+  &::after {
+    position: absolute;
+    bottom: 10px;
+    width: 100vw;
+    height: calc(100vw / 4.26667);
+    background: url('/images/banner/hsv-neuwied-banner.min.svg') no-repeat;
+    content: '';
+  }
+
+  ${mediaQuery('lg')} {
+    padding-top: calc(${({ theme }) => theme.sizes.header.height} - 2.5vw);
+  }
+`;
 
 type Props = {
   title?: string;
@@ -46,26 +68,7 @@ export default function Layout({ children, title = 'Heimatsportverein Neuwied 20
 
       <Header />
 
-      <Box
-        as="main"
-        pos="relative"
-        mb={theme.sizes.footer.height}
-        pt={{ lg: `calc(${theme.sizes.header.height} - 2.5vw)` }}
-        pb="calc(102.5vw / 4.26667 + 10rem)"
-        overflowX="hidden"
-        bgColor={theme.colors.gray.light}
-        clipPath="polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw))"
-        _after={{
-          pos: 'absolute',
-          bottom: '10px',
-          w: '100vw',
-          h: 'calc(100vw / 4.26667)',
-          background: 'url("/images/banner/hsv-neuwied-banner.min.svg") no-repeat',
-          content: '""',
-        }}
-      >
-        {children}
-      </Box>
+      <Main>{children}</Main>
 
       <Footer />
     </>

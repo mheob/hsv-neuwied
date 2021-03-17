@@ -1,18 +1,28 @@
-import { HStack, StackProps } from '@chakra-ui/react';
+import styled from 'styled-components';
 
 import { Article } from '../../models/news';
 import GridItem from '../News/GridItem';
 
+const Container = styled.section`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 4rem;
+`;
+
+const Article = styled(GridItem)`
+  width: 33%;
+`;
+
 type Props = {
   prev?: Article;
   next?: Article;
-} & StackProps;
+};
 
-export default function ArticlePagination({ prev, next, ...all }: Props) {
+export default function ArticlePagination({ prev, next }: Props) {
   return (
-    <HStack justifyContent="space-around" mt="16" {...all}>
-      {prev && <GridItem w={1 / 3} article={prev} />}
-      {next && <GridItem w={1 / 3} article={next} />}
-    </HStack>
+    <Container>
+      {prev && <Article article={prev} />}
+      {next && <Article article={next} />}
+    </Container>
   );
 }

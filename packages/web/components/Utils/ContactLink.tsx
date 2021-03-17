@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Link, LinkProps } from '@chakra-ui/react';
-import { CSSProperties, useState } from 'react';
+import { AnchorHTMLAttributes, CSSProperties, useState } from 'react';
 
 type Props = {
   header?: {
@@ -10,7 +9,7 @@ type Props = {
     cc?: string;
     subject?: string;
   };
-} & LinkProps;
+} & AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export default function ContactLink({ header, children, href, style, title, ...all }: Props) {
   const [humanInteractionState, setHumanInteractionState] = useState(false);
@@ -45,7 +44,7 @@ export default function ContactLink({ header, children, href, style, title, ...a
     direction: humanInteractionState ? 'ltr' : 'rtl',
   };
 
-  const renderProps: LinkProps = {
+  const renderProps: AnchorHTMLAttributes<HTMLAnchorElement> = {
     ...all,
     href: humanInteractionState === true ? createContactLink() : 'obfuscated',
     onFocus: handleCopiability,
@@ -56,8 +55,6 @@ export default function ContactLink({ header, children, href, style, title, ...a
   };
 
   return (
-    <Link {...renderProps}>
-      {children ? children : humanInteractionState ? href : reverse(href!)}
-    </Link>
+    <a {...renderProps}>{children ? children : humanInteractionState ? href : reverse(href!)}</a>
   );
 }

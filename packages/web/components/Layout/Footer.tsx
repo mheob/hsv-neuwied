@@ -1,8 +1,74 @@
-import { Box, Link, Stack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
+import { mediaQuery } from '../../styles';
 import Container from '../UI/Container';
+
+const FooterStyled = styled.footer`
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
+  width: 100%;
+  margin: 3rem 0;
+  color: white;
+`;
+
+const ContainerStyled = styled(Container)`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Copyright = styled.div`
+  font-size: ${({ theme }) => theme.sizes.font.sm};
+
+  ${mediaQuery('lg')} {
+    font-size: ${({ theme }) => theme.sizes.font.md};
+  }
+
+  ${mediaQuery('2xl')} {
+    font-size: ${({ theme }) => theme.sizes.font.xl};
+  }
+`;
+
+const CopyrightText = styled.span`
+  margin-right: 0.5rem;
+`;
+
+const Link = styled.a<{ isActive: boolean }>`
+  color: ${({ isActive, theme }) => (isActive ? theme.colors.brand.light : 'white')};
+
+  &:hover {
+    color: ${({ isActive, theme }) => (isActive ? 'white' : theme.colors.brand.light)};
+  }
+`;
+
+const Navigation = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: ${({ theme }) => theme.sizes.font.sm};
+
+  ${mediaQuery('sm')} {
+    flex-direction: row;
+
+    > * ~ * {
+      margin-left: 1rem;
+    }
+  }
+
+  ${mediaQuery('lg')} {
+    font-size: ${({ theme }) => theme.sizes.font.md};
+
+    > * ~ * {
+      margin-left: 2.5rem;
+    }
+  }
+
+  ${mediaQuery('2xl')} {
+    font-size: ${({ theme }) => theme.sizes.font.xl};
+  }
+`;
 
 export default function Footer() {
   const router = useRouter();
@@ -10,47 +76,24 @@ export default function Footer() {
   const isLinkToCurrentPage = (href: string) => href === router.pathname;
 
   return (
-    <Box as="footer" pos="fixed" bottom="0" w="full" my="12" color="white" zIndex="hide">
-      <Container d="flex" justifyContent="space-between">
-        <Box fontSize={{ base: 'sm', lg: 'md', '2xl': 'xl' }}>
-          <Text as="span" mr="2">
-            &copy; 2014 &ndash; {new Date().getFullYear()}
-          </Text>
-          <NextLink href="/" passHref>
-            <Link
-              color={`${isLinkToCurrentPage('/') ? 'brand.light' : 'white'}`}
-              _hover={{ color: `${isLinkToCurrentPage('/') ? 'white' : 'brand.light'}` }}
-            >
-              HSV Neuwied
-            </Link>
+    <FooterStyled>
+      <ContainerStyled>
+        <Copyright>
+          <CopyrightText>&copy; 2014 &ndash; {new Date().getFullYear()}</CopyrightText>
+          <NextLink href="/">
+            <Link isActive={isLinkToCurrentPage('/')}>HSV Neuwied</Link>
           </NextLink>
-        </Box>
+        </Copyright>
 
-        <Stack
-          as="nav"
-          direction={{ base: 'column', sm: 'row' }}
-          alignItems="flex-end"
-          fontSize={{ base: 'sm', lg: 'md', '2xl': 'xl' }}
-          spacing={{ sm: '4', lg: '10' }}
-        >
-          <NextLink href="/imprint" as="/impressum" passHref>
-            <Link
-              color={`${isLinkToCurrentPage('/imprint') ? 'brand.light' : 'white'}`}
-              _hover={{ color: `${isLinkToCurrentPage('/imprint') ? 'white' : 'brand.light'}` }}
-            >
-              Impressum
-            </Link>
+        <Navigation>
+          <NextLink href="/imprint" as="/impressum">
+            <Link isActive={isLinkToCurrentPage('/imprint')}>Impressum</Link>
           </NextLink>
           <NextLink href="/privacy" as="/datenschutz">
-            <Link
-              color={`${isLinkToCurrentPage('/privacy') ? 'brand.light' : 'white'}`}
-              _hover={{ color: `${isLinkToCurrentPage('/privacy') ? 'white' : 'brand.light'}` }}
-            >
-              Datenschutz
-            </Link>
+            <Link isActive={isLinkToCurrentPage('/privacy')}>Datenschutz</Link>
           </NextLink>
-        </Stack>
-      </Container>
-    </Box>
+        </Navigation>
+      </ContainerStyled>
+    </FooterStyled>
   );
 }

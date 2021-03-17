@@ -67,21 +67,25 @@ const AnchorStyled = styled.a<ButtonStyledProps>`
 type Props = {
   children?: ReactNode;
   colorScheme?: ColorScheme;
+  disabled?: boolean;
   href?: string;
   mt?: string | { [key in Breakpoint]: string };
   noTransform?: boolean;
   openInNewTab?: boolean;
   size?: Size;
+  type?: 'button' | 'reset' | 'submit';
 };
 
 export default function Button({
   children,
   colorScheme = 'base',
+  disabled = false,
   href,
   mt,
   noTransform,
   openInNewTab,
   size,
+  type = 'button',
 }: Props) {
   if (!href) {
     return (
@@ -90,7 +94,8 @@ export default function Button({
         mt={mt}
         noTransform={noTransform}
         size={size}
-        type="button"
+        type={type}
+        disabled={disabled}
       >
         {children}
       </ButtonStyled>

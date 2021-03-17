@@ -7,9 +7,9 @@ import { mediaQuery } from '../../styles';
 import Button from '../Forms/Button';
 import SectionHeader from '../UI/Header/SectionHeader';
 
-const Article = styled.article`
-  cursor: grab;
+const ArticleStyled = styled.article`
   height: ${({ theme }) => theme.sizes.news.slider.imageHeightMobile + 5}vh;
+  cursor: grab;
 
   ${mediaQuery('sm')} {
     height: ${({ theme }) => theme.sizes.news.slider.imageHeight + 5}vh;
@@ -27,8 +27,8 @@ const Teaser = styled.div`
 `;
 
 const SectionHeaderStyled = styled(SectionHeader)`
-  font-size: ${({ theme }) => theme.sizes.font.lg};
   font-weight: bold;
+  font-size: ${({ theme }) => theme.sizes.font.lg};
 
   ${mediaQuery('md')} {
     font-size: ${({ theme }) => theme.sizes.font.xl};
@@ -50,8 +50,8 @@ const Excerpt = styled.p`
 `;
 
 const ButtonStyled = styled(Button)`
-  margin-top: 1rem;
   align-self: flex-start;
+  margin-top: 1rem;
 `;
 
 type Props = { article: Article };
@@ -66,7 +66,7 @@ export default function Slide({ article }: Props) {
   }/${article.slug}`;
 
   return (
-    <Article>
+    <ArticleStyled>
       {/*
         // TODO: Use the NextJS Image component
         //       (currently styled in /theme/external/SlickSlider.tsx)
@@ -90,6 +90,6 @@ export default function Slide({ article }: Props) {
           </>
         )}
       </Teaser>
-    </Article>
+    </ArticleStyled>
   );
 }

@@ -1,16 +1,69 @@
-import { Box, ChakraProps, HStack, Icon, StackDivider } from '@chakra-ui/react';
 import Image from 'next/image';
 import { IoCall, IoMail } from 'react-icons/io5';
+import styled, { css } from 'styled-components';
 
 import { PersonCard as PersonCardType } from '../../../models/person';
-import theme from '../../../theme';
+import { Breakpoint, getTopSpacing, mediaQuery } from '../../../styles';
 import ContactLink from '../../Utils/ContactLink';
 
-type Props = { person: PersonCardType } & ChakraProps;
+type CardProps = {
+  mt?: string | { [key in Breakpoint]?: string };
+};
 
-export default function PersonCard({ person, ...all }: Props) {
+const Card = styled.div<CardProps>`
+  ${({ mt }) => mt && getTopSpacing(mt)}
+
+  ${mediaQuery('lg')} {
+    position: relative;
+  }
+`;
+
+const ContactSection = styled.div`
+  background-color: ${({ theme }) => theme.colors.brand.base};
+  transition: 300ms ease height;
+
+  ${mediaQuery('lg')} {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 0;
+  }
+
+  & > * ~ * {
+    border-left: 1px solid ${({ theme }) => theme.colors.brand.light};
+  }
+
+  [role='group']:hover & {
+    height: 20%;
+  }
+`;
+
+const ContactLinkStyled = styled(ContactLink)`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.gray.light};
+
+  &:hover {
+    ${({ theme }) => theme.colors.brand.light}
+  }
+`;
+
+const iconStyles = css`
+  width: 2.5rem;
+  transition: 300ms ease height;
+
+  [role='group']:hover & {
+    height: 2.5rem;
+  }
+`;
+
+type Props = { person: PersonCardType } & CardProps;
+
+export default function PersonCard({ person, mt }: Props) {
   return (
-    <Box pos={{ lg: 'relative' }} role="group" {...all}>
+    <Card mt={mt} role="group">
       <Image
         src={person.image}
         alt={`${person.name} - ${person.position}`}
@@ -18,47 +71,19 @@ export default function PersonCard({ person, ...all }: Props) {
         height={600}
       />
 
-      <HStack
-        divider={<StackDivider borderColor={theme.colors.brand.light} />}
-        pos={{ lg: 'absolute' }}
-        right="0"
-        bottom="0"
-        left="0"
-        h="0"
-        bgColor={theme.colors.brand.base}
-        transition="300ms ease height"
-        _groupHover={{ h: '20%' }}
-      >
+      <ContactSection>
         {person.mail && (
-          <ContactLink
-            href={`mailto:${person.mail}`}
-            title={person.mail}
-            isExternal
-            d="flex"
-            flex="1"
-            justifyContent="center"
-            color={theme.colors.gray.light}
-            _hover={{ color: theme.colors.brand.light }}
-          >
-            <Icon as={IoMail} w="10" transition="300ms ease height" _groupHover={{ h: '10' }} />
-          </ContactLink>
+          <ContactLinkStyled href={`mailto:${person.mail}`} title={person.mail}>
+            <IoMail css={iconStyles} />
+          </ContactLinkStyled>
         )}
 
         {person.tel && (
-          <ContactLink
-            href={`tel:${person.tel.replace(/\s/g, '')}`}
-            title={person.tel}
-            isExternal
-            d="flex"
-            flex="1"
-            justifyContent="center"
-            color={theme.colors.gray.light}
-            _hover={{ color: theme.colors.brand.light }}
-          >
-            <Icon as={IoCall} w="10" transition="300ms ease height" _groupHover={{ h: '10' }} />
-          </ContactLink>
+          <ContactLinkStyled href={`tel:${person.tel.replace(/\s/g, '')}`} title={person.tel}>
+            <IoCall css={iconStyles} />
+          </ContactLinkStyled>
         )}
-      </HStack>
-    </Box>
+      </ContactSection>
+    </Card>
   );
 }

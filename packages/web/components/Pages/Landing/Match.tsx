@@ -3,16 +3,16 @@ import styled from 'styled-components';
 
 import sampleMatchList from '../../../data/sample-matches.json';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import { Match, NearestMatch } from '../../../models/match';
+import { Match as MatchType, NearestMatch } from '../../../models/match';
 import { mediaQuery } from '../../../styles';
 import { formatDateToLocaleShort, formatTimeToLocaleShort } from '../../../utils/date-time';
 
 // TODO: Remove after the matches are fetched from the database
-const matchList = sampleMatchList as Match[];
+const matchList = sampleMatchList as MatchType[];
 
 const Article = styled.article`
-  background-color: white;
   padding: 3rem;
+  background-color: white;
   box-shadow: ${({ theme }) => theme.shadows.md};
 `;
 
@@ -31,8 +31,8 @@ const Grid = styled.div`
 const TeamContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   min-width: 64px;
 
   ${mediaQuery('lg')} {
@@ -42,14 +42,14 @@ const TeamContainer = styled.div`
 
 const ImageContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 `;
 
 const TeamName = styled.div`
   margin-top: 1rem;
-  text-align: center;
   font-size: ${({ theme }) => theme.sizes.font.sm};
+  text-align: center;
 
   ${mediaQuery('sm')} {
     font-size: ${({ theme }) => theme.sizes.font.md};
@@ -57,11 +57,11 @@ const TeamName = styled.div`
 `;
 
 const MatchInformation = styled.div`
-  column-span: 2;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
+  column-span: 2;
 `;
 
 const Meta = styled.div`

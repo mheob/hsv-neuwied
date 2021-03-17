@@ -1,12 +1,5 @@
-import {
-  Checkbox,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  Textarea,
-} from '@chakra-ui/react';
-import { Field, FieldProps, Form, Formik, FormikProps } from 'formik';
+import { Field, Form, Formik, FormikProps } from 'formik';
+import styled from 'styled-components';
 import * as Yup from 'yup';
 
 import Button from '../../Forms/Button';
@@ -27,6 +20,14 @@ const ValidationSchema = Yup.object().shape({
   privacy: Yup.boolean().required(requiredMessage).oneOf([true], requiredMessage),
 });
 
+const ErrorMessage = styled.div`
+  color: ${({ theme }) => theme.colors.error};
+`;
+
+const ButtonStyled = styled(Button)`
+  width: 100%;
+`;
+
 type FormValues = { name: string; email: string; message: string; privacy: boolean };
 
 export default function Simple() {
@@ -42,71 +43,35 @@ export default function Simple() {
       validateOnBlur
       validationSchema={ValidationSchema}
     >
-      {({ isValid }: FormikProps<FormValues>) => (
+      {({ errors, isValid, touched }: FormikProps<FormValues>) => (
         <Form>
           <Field name="name">
-            {({ field, form }: FieldProps) => (
-              <FormControl isInvalid={!!(form.errors.name && form.touched.name)} isRequired>
-                <FormLabel htmlFor="name">Name</FormLabel>
-                <Input {...field} id="name" variant="filled" />
-                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-              </FormControl>
-            )}
+            {errors.name && touched.name ? <ErrorMessage>{errors.name}</ErrorMessage> : null}
           </Field>
 
-          <Field name="email">
-            {({ field, form }: FieldProps) => (
-              <FormControl
-                isInvalid={!!(form.errors.email && form.touched.email)}
-                isRequired
-                mt="8"
-              >
-                <FormLabel htmlFor="email">E-Mail</FormLabel>
-                <Input {...field} type="email" id="email" variant="filled" />
-                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-              </FormControl>
-            )}
+          <Field name="email" type="email">
+            {errors.email && touched.email ? <ErrorMessage>{errors.email}</ErrorMessage> : null}
           </Field>
 
-          <Field name="message">
-            {({ field, form }: FieldProps) => (
-              <FormControl
-                isInvalid={!!(form.errors.message && form.touched.message)}
-                isRequired
-                mt="8"
-              >
-                <FormLabel htmlFor="message">Nachricht</FormLabel>
-                <Textarea {...field} id="message" variant="filled" />
-                <FormErrorMessage>{form.errors.message}</FormErrorMessage>
-              </FormControl>
-            )}
+          <Field name="message" as="textarea">
+            {errors.message && touched.message ? (
+              <ErrorMessage>{errors.message}</ErrorMessage>
+            ) : null}
           </Field>
 
-          <Field name="privacy">
-            {({ field, form }: FieldProps) => (
-              <FormControl
-                isInvalid={!!(form.errors.privacy && form.touched.privacy)}
-                isRequired
-                mt="8"
-              >
-                <Checkbox
-                  {...field}
-                  isInvalid={!!(form.errors.privacy && form.touched.privacy)}
-                  isRequired
-                  id="privacy"
-                  variant="filled"
-                  colorScheme="brand"
-                >
-                  {/* // TODO: Add the Link to the privacy page */}
-                  Die Informationen zum <a>Datenschutz</a> sind mir bekannt und habe ich verstanden.
-                </Checkbox>
-                <FormErrorMessage>{form.errors.privacy}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-          <Button type="submit" disabled={!isValid} mt="8" w="full">
+          <label>
+            <Field name="privacy" type="checkbox">
+              {errors.privacy && touched.privacy ? (
+                <ErrorMessage>{errors.privacy}</ErrorMessage>
+              ) : null}
+            </Field>
+            {/* // TODO: Add the Link to the privacy page */}
+            Die Informationen zum <a>Datenschutz</a> sind mir bekannt und habe ich verstanden.
+          </label>
+
+          <ButtonStyled type="submit" disabled={!isValid} mt="8">
             Absenden
-          </Button>
+          </ButtonStyled>
         </Form>
       )}
     </Formik>

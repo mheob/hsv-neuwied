@@ -1,53 +1,66 @@
-import { Box } from '@chakra-ui/react';
 import { useContext } from 'react';
+import styled from 'styled-components';
 
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import RootContext from '../../../store/RootContext';
-import theme, { breakpoints } from '../../../theme';
+import { mediaQuery } from '../../../styles';
 import Container from '../../UI/Container';
 import Heading from './Heading';
 import Logo from './Logo';
 import Navigation from './Navigation';
 
+const HeaderStyled = styled.header`
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  color: white;
+
+  ${mediaQuery('lg')} {
+    position: fixed;
+  }
+`;
+
+const OuterBox = styled.div<{ isPinned?: boolean }>`
+  position: relative;
+  width: 100%;
+  height: ${({ isPinned, theme }) =>
+    isPinned ? theme.sizes.header.heightPinned : theme.sizes.header.height};
+  background-color: ${({ theme }) => theme.colors.brand.dark};
+  transition: all 200ms linear;
+
+  ${mediaQuery('lg')} {
+    position: ${({ isPinned }) => (isPinned ? 'fixed' : 'static')};
+    clip-path: ${({ isPinned }) =>
+      isPinned
+        ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
+        : 'polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2.5vw))'};
+  }
+`;
+
+const InnerBox = styled(Container)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: ${({ theme }) => theme.sizes.header.heightPinned};
+  transition: all 200ms linear;
+`;
+
 export default function Header() {
   const { isPinned } = useContext(RootContext);
-  const { isMobile } = useMediaQuery(breakpoints.sm);
+  const isMobile = useMediaQuery('sm');
 
   return (
-    <Box
-      as="header"
-      color="white"
-      position={{ base: 'relative', lg: 'fixed' }}
-      w="full"
-      zIndex="sticky"
-    >
+    <HeaderStyled>
       <Container>
         <Logo />
       </Container>
 
-      <Box
-        pos={{ lg: isPinned ? 'fixed' : 'static' }}
-        w="full"
-        h={{ lg: isPinned ? theme.sizes.header.heightPinned : theme.sizes.header.height }}
-        transition="all 200ms linear"
-        bgColor="brand.dark"
-        clipPath={{
-          lg: isPinned
-            ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'
-            : 'polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2.5vw))',
-        }}
-      >
-        <Container
-          d="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          h={theme.sizes.header.heightPinned}
-          transition="all 200ms linear"
-        >
+      <OuterBox isPinned={isPinned}>
+        <InnerBox>
           {!isMobile && <Heading />}
           <Navigation />
-        </Container>
-      </Box>
-    </Box>
+        </InnerBox>
+      </OuterBox>
+    </HeaderStyled>
   );
 }

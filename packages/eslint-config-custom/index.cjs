@@ -3,7 +3,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   extends: ['plugin:unicorn/recommended', 'plugin:prettier/recommended'],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'warn',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-implicit-coercion': ['error', { allow: ['!!', '+', '~'] }],
     'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],

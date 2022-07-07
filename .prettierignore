@@ -1,0 +1,14 @@
+# dependencies
+node_modules
+pnpm-*.yaml
+
+# testing
+coverage
+
+# next.js
+.next/
+out/
+build
+
+# turbo
+.turbo

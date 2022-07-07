@@ -83,3 +83,12 @@ Learn more about the power of Turborepo:
 - [Scoped Tasks](https://Turborepo.org/docs/core-concepts/scopes)
 - [Configuration Options](https://Turborepo.org/docs/reference/configuration)
 - [CLI Usage](https://Turborepo.org/docs/reference/command-line-reference)
+
+---
+
+## Using Git Hooks
+
+We use [simple-git-hooks](`https://github.com/toplenboren/simple-git-hooks`) for handling git hooks.
+
+The hooks are defined in the `package.json`. The needed scripts inside the hooks should be stored in
+the `scripts` folder to have a clean structure.

@@ -8,8 +8,9 @@
   ],
   "scripts": {
     "build": "pnpm exec turbo run build",
+    "check-ci": "concurrently \"pnpm run build\" \"pnpm run lint\"",
     "dev": "pnpm exec turbo run dev --parallel",
-    "format": "pnpm exec prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx,yml,yaml}\" \"!pnpm-*.yaml\"",
+    "format": "pnpm exec prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx,yml,yaml}\" \"!pnpm-*.yaml\" --ignore-path .gitignore",
     "lint": "pnpm exec turbo run lint",
     "pnpm:devPreinstall": "pnpm exec simple-git-hooks"
   },
@@ -34,6 +35,7 @@
     "@commitlint/config-conventional": "^17.0.3",
     "@mheob/prettier-config": "^1.0.1",
     "@types/node": "^18.0.3",
+    "concurrently": "^7.2.2",
     "eslint-config-custom": "workspace:*",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",

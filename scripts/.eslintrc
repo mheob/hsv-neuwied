@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "../.eslintrc"
+  ],
+  "rules": {
+    "no-console": "off",
+    "unicorn/no-process-exit": "off"
+  }
+}

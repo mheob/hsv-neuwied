@@ -1,5 +1,7 @@
 import { existsSync } from 'node:fs';
 
+console.log('ℹ️ Checking correct usage of only pnpm lock file ...');
+
 const checkLockFiles = (): string[] => {
   const uesYarnLockFileMessage = 'Please remove it and use only "pnpm-lock.yaml".';
   const invalidFileMessage = (lockFile: string): string =>
@@ -26,5 +28,7 @@ if (invalidLockFileErrors.length > 0) {
   for (const error of invalidLockFileErrors) console.log(error);
   process.exit(1);
 }
+
+console.log('✅ Lock files are looking good.');
 
 process.exit(0);
